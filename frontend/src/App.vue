@@ -1,18 +1,21 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
 import grunt from './components/grunt.vue'
 import flower from './components/flower.vue'
+import scene from './components/scene.vue'
+import farm from './components/farm.vue'
 
 import HelpAsync from './components/session_key/HelpAsync.vue';
 </script>
 
 <template>
   <div id="app" @click="handleClick">
-      <HelpAsync></HelpAsync>
+      <scene></scene>
+      <farm></farm>
       <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
+      <HelpAsync></HelpAsync>
   </div>
 </template>
 
