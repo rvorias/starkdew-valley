@@ -23,6 +23,7 @@ import sprouts from "../assets/Atlas/weed_0.png?url"
 import smol from "../assets/Atlas/weed_1.png?url"
 import medium from "../assets/Atlas/weed_2.png?url"
 import big from "../assets/Atlas/weed_3.png?url"
+import rotten from "../assets/Atlas/weed_4.png?url"
 
 export default {
     data () {
@@ -32,6 +33,7 @@ export default {
                 1: `url(${smol})`,
                 2: `url(${medium})`,
                 3: `url(${big})`,
+                4: `url(${rotten})`,
             }
 		}
 	},
@@ -55,8 +57,11 @@ export default {
             else if (this.stage < scalingFactor*3) {
                 mappedStage = 2;
             }
+            else if (this.stage < scalingFactor*4) {
+                mappedStage = 4;
+            }
             else {
-                mappedStage = 3;
+                mappedStage = 5;
             }
 
 			return {

@@ -1,8 +1,8 @@
 import { reactive } from 'vue'
 
 export var gruntState = reactive({
-    x: 500,
-    y: 500,
+    x: 165,
+    y: 150,
     animationName: '',
 })
 
