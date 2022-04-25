@@ -1,0 +1,116 @@
+[
+    {
+        "inputs": [],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "get_workers",
+        "outputs": [
+            {
+                "name": "workers",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "get_wheat",
+        "outputs": [
+            {
+                "name": "wheat",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "claim_worker",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "x_coord",
+                "type": "felt"
+            },
+            {
+                "name": "y_coord",
+                "type": "felt"
+            }
+        ],
+        "name": "build_farm",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "farm_id",
+                "type": "felt"
+            },
+            {
+                "name": "x_coord",
+                "type": "felt"
+            },
+            {
+                "name": "y_coord",
+                "type": "felt"
+            }
+        ],
+        "name": "claim_resources",
+        "outputs": [
+            {
+                "name": "success",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "farm_id",
+                "type": "felt"
+            }
+        ],
+        "name": "get_available_resources",
+        "outputs": [
+            {
+                "name": "days_accrued",
+                "type": "felt"
+            },
+            {
+                "name": "remainder",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
