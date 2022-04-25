@@ -8,11 +8,9 @@ import flower from './components/flower.vue'
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" @click="handleClick">
     <grunt></grunt>
-    <li v-for="flower in flower_coords">
-      <flower :x_coord="flower.x" :y_coord="flower.y"></flower>
-    </li>
+      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
   </div>
 </template>
 
@@ -26,14 +24,15 @@ export default {
     }
   },
 
-
-
   mounted () {
     window.addEventListener('keydown', this.handleControlDown);
     window.addEventListener('keyup', this.handleControlUp);
     setInterval(this.moveGrunt, 1);
   },
   methods: {
+    handleClick(event: MouseEvent) {
+      this.flower_coords.push({x: gruntState.x, y: gruntState.y})
+    },
     handleControlDown(event: KeyboardEvent) {
       if (event.key === 'w') {
         controller.up = true;

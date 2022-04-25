@@ -40,7 +40,7 @@ export default {
     computed: {
 		styles () {
 			return {
-				transform:  `translate3d(${this.x_coord - 25}px, ${this.y_coord - 25}px, 0)`,
+				transform:  `translate3d(${this.x_coord - 8}px, ${this.y_coord - 8}px, 0)`,
                 background: this.plantStateImageMap[plantState.stage]
 			} 
 		}
