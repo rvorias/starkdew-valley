@@ -46,7 +46,7 @@ export default {
 		styles () {
 
             var mappedStage = 0;
-            const scalingFactor = 200;
+            const scalingFactor = 1;
 
             if (this.stage < scalingFactor) {
                 mappedStage = 0;

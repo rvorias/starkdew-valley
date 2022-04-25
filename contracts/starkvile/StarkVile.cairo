@@ -85,10 +85,10 @@ func _allFarms{
 
     let (farm) = farms.read(index - 1)
 
-    assert farm_output.plant_time = farm.plant_time
-    assert farm_output.owner = farm.owner
-    assert farm_output.x_coord = farm.x_coord
-    assert farm_output.y_coord = farm.y_coord
+    farm_output.plant_time = farm.plant_time
+    farm_output.owner = farm.owner
+    farm_output.x_coord = farm.x_coord
+    farm_output.y_coord = farm.y_coord
 
     return _allFarms(index - 1, farm_output + Farm.SIZE)
 end
@@ -165,7 +165,7 @@ farm_id: felt, x_coord: felt, y_coord: felt) -> (success : felt):
 
     # check owner
     with_attr error_message("Ser, you do not own this farm"):
-        assert farm.owner = 2
+        #assert farm.owner = 2
         assert farm.x_coord = x_coord
         assert farm.y_coord = y_coord
     end

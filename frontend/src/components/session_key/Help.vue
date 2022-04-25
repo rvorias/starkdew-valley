@@ -34,11 +34,6 @@ export default defineComponent({
             sessionKeyData: "",
         }
     },
-    async mounted() {
-        if(ACCOUNT_CONTRACT) {
-            this.balance = await starkvile.get_wheat(ACCOUNT_CONTRACT)
-        }
-    },
     methods: {
         getSigner() {
             let prov = new Provider({
