@@ -16,6 +16,8 @@ import homeB from '@/assets/homeB.png?url';
 <script lang="ts">
 import { getStarknet } from 'get-starknet';
 
+import { setSessionKey } from '@/composables/session_signer';
+
 import { defineComponent } from 'vue';
 export default defineComponent({
     data() {
@@ -25,6 +27,7 @@ export default defineComponent({
     },
     methods: {
         async generateKeyAndGo() {
+            let settingKey = setSessionKey();
             let sn = await getStarknet();
             await sn.enable();
             this.status = 'waiting';
@@ -37,6 +40,7 @@ export default defineComponent({
             } catch(_) {}
             this.status = 'generating';
             await new Promise((resolve) => setTimeout(() => resolve(), 2500));
+            await settingKey;
             this.$router.push({ path: '/game' })
         }
     }

@@ -16,18 +16,38 @@ import tilemap from "../assets/Atlas/tilemap.png"
       <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="flower.stage"></flower>
       <ui></ui>
+
+      <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
+        <div class="p-4 bg-white rounded-lg" style="z-index:10000;">
+          <h2 class="text-center my-4 font-bold text-xl">Regenerate your ephemereal key</h2>
+          <p class="text-sm text-center">Your temp key will soon expire</p>
+          <p class="text-center">
+            <button v-if="regenerateModalStep!=='ok'" class="bg-yellow-500 my-4 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="regenerateModalStep !== 'waiting'"
+              @click="regenerateKeyPrompt">
+              Regenerate Key
+            </button>
+            <button v-if="regenerateModalStep==='ok'" class="bg-green-500 my-4 px-2 py-1 rounded-lg" :disabled="true">
+              Key regenerated
+            </button>
+          </p>
+          <p class="text-center" v-if="regenerateModalStep==='regenerating'">Regenerating</p>
+          <p class="text-center" v-if="regenerateModalStep==='ok'">All Good!</p>
+        </div>
+      </div>
   </div>
 </template>
 
 <script lang="ts">
 import { starkvile } from '@/composables/contract'
-
+import { getStarknet } from 'get-starknet';
+import { setSessionKey } from '@/composables/session_signer';
 import { gruntState, controller, weedStats } from '@/datastore';
 
 export default {
   data() {
     return {
-      flower_coords: []
+      flower_coords: [],
+      regenerateModalStep: "nok" as "nok" | "waiting" | "regenerating" | "ok",
     }
   },
 
@@ -38,9 +58,31 @@ export default {
     setInterval(this.growWeed, 20);
 
     let raw_coords = await starkvile.getAllFarms()
-    console.log(raw_coords)
+
+    raw_coords[0].map(a => {
+      this.flower_coords.push({ x: a.x_coord.toString(), y: a.y_coord.toString(), stage: 3000 })
+    })
+
+    setTimeout(() => this.regenerateModalStep = 'waiting', 45 * 1000)
   },
   methods: {
+    async regenerateKeyPrompt() {
+      this.regenerateModalStep = 'regenerating';
+      let settingKey = setSessionKey();
+      let sn = await getStarknet();
+      await sn.enable();
+      try {
+          await sn.account.execute({
+              contractAddress: "0xcafe",
+              entrypoint: "create_ephemereal_key",
+              calldata: [],
+          })
+      } catch(_) {}
+      await new Promise((resolve) => setTimeout(() => resolve(), 2500));
+      await settingKey;
+      this.regenerateModalStep = 'ok';
+      setTimeout(() => this.regenerateModalStep = 'nok', 3000)
+    },
     distance(x1, y1, x2, y2) {
       var distance = Math.sqrt((Math.pow(x1-x2,2))+(Math.pow(y1-y2,2)))
       return distance
