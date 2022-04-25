@@ -198,7 +198,7 @@ func constructor{
         ecdsa_ptr: SignatureBuiltin*,
         range_check_ptr
     }():
-    _session_key_contract.write(0x007fc4ee71dcd9e993e673315b7f5afd84bde6a945e8023769b802191e4783d5)
+    _session_key_contract.write(0x0327ab3f2f94daf4f4b5eecf47130efc273b3f5a956f0442c7300a39d47ef02a)
     return ()
 end
 
