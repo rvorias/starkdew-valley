@@ -3,15 +3,15 @@ import homeB from '@/assets/homeB.png?url';
 </script>
 
 <template>
-    <div :style="{ backgroundImage: `url(${homeB})` }" class="w-[1000px] h-[710px] bg-contain bg-no-repeat relative flex flex-row justify-center items-center text-center">
-        <div class="flex flex-col justify-center items-center text-center flex-1 p-4">
+    <div :style="{ backgroundImage: `url(${homeB})` }" class="w-[1000px] h-[710px] bg-contain bg-no-repeat relative flex flex-row justify-around items-center text-center">
+        <div class="flex flex-col justify-center items-center text-center flex-1 p-20">
             <h3 class="text-2xl font-bold">Use your regular wallet</h3>
-            <p class="my-8">This gives you full control, but will lead to more annoyance.</p>
+            <p class="my-8">This gives you full control, but will lead to more annoyance.</p><br>
             <button @click="slowMode" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
                 🐢 Use your regular wallet
             </button>
         </div>
-        <div class="flex flex-col justify-center items-center text-center flex-1 p-4">
+        <div class="flex flex-col justify-center items-center text-center flex-1 p-20">
             <h3 class="text-2xl font-bold">Use session key</h3>
             <p class="my-8">This will allow your browser to sign transactions automatically on your behalf.</p>
             <button @click="generateKeyAndGo" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
