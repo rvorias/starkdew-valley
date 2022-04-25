@@ -1,10 +1,3 @@
-<script setup lang="ts">
-    import { ref } from 'vue'
-    import tree from './atlas/tree.vue'
-    import rock from './atlas/rock.vue'
-    import plot from './atlas/plot.vue'
-</script>
-
 <template>
     <div class="scene">
         <tree :x_coord="50" :y_coord="50"></tree>
@@ -26,10 +19,13 @@
 
 
 <script lang="ts">
-
-export default {
-	data () {
-		return {}
-	}
-}
+    import { ref } from 'vue'
+    import tree from './atlas/tree.vue'
+    import rock from './atlas/rock.vue'
+    import plot from './atlas/plot.vue'
+    export default {
+        data () {
+            return {}
+        }
+    }
 </script>

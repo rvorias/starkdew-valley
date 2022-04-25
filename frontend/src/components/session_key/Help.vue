@@ -3,6 +3,7 @@
         <h1>ToTo</h1>
         <button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button>
         <button @click.stop="doSomething" class="bg-gray-500">Do Something</button>
+
     </div>
 </template>
 
@@ -11,6 +12,8 @@
 const ACCOUNT_CONTRACT = "0x04b5f4857ebb588bfc964edb773791018cb7678bf55ca6e5fdcfadaf0e26114c"
 const ACCOUNT_PRIVATE_KEY = 123456
 const SESSION_PRIVATE_KEY = 0xcafefade
+
+import {starkvile} from '@/composables/contract'
 
 import { makeSigner } from './Help';
 import { Provider, Account, getStarknet } from '@/starknet_wrapper'
@@ -29,12 +32,11 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     data() {
         return {
-
+            balance: 0
         }
     },
     async mounted() {
-        let starknet = await getStarknet();
-        starknet.enable();
+        this.balance = await starkvile.get_wheat('0x015c618ef96e0df85832cb1dd514c4fa4bb5b38ecabfe0464808bc8645fbc6f4')
     },
     methods: {
         getSigner() {
