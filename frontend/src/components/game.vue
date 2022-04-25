@@ -19,6 +19,8 @@ import ui from './ui.vue'
 </template>
 
 <script lang="ts">
+import { starkvile } from '@/composables/contract'
+
 import { gruntState, controller } from '@/datastore';
 
 export default {
@@ -55,9 +57,10 @@ export default {
         flower.stage = flower.stage + 1
       })
     },
-    handleClick(event: MouseEvent) {
+    async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
+        await starkvile.claim_worker()
         // Plant flowers
         // Use gruntState.x, gruntState.y
         this.flower_coords.push({x: gruntState.x, y: gruntState.y})

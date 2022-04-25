@@ -28,7 +28,9 @@ export default defineComponent({
         }
     },
     async mounted() {
-        this.balance = await starkvile.get_wheat('0x015c618ef96e0df85832cb1dd514c4fa4bb5b38ecabfe0464808bc8645fbc6f4')
+        if(ACCOUNT_CONTRACT) {
+            this.balance = await starkvile.get_wheat(ACCOUNT_CONTRACT)
+        }
     },
     methods: {
         getSigner() {
