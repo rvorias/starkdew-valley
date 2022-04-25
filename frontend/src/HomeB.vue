@@ -11,8 +11,8 @@ import homeB from '@/assets/homeB.png?url';
         </div>
         <p>I want to play StarkDew Valley for 2min</p>
         <p>This will allow your browser to sign transactions automatically on your behalf</p>
-        <button @click="generateKeyAndGo" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
-            Create a 2-hour ephemereal key and start playing
+        <button @click="generateKeyAndGo" class="bg-gradient-to-b from-gray-100 via-yellow-200 to-orange-400 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
+            Create a 2-hour session key and start playing
         </button>
         <p v-if="status === 'generating'">...Loading...</p>
     </div>

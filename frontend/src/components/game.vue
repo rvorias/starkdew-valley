@@ -19,14 +19,14 @@ import tilemap from "../assets/Atlas/tilemap.png"
 
       <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
         <div class="p-4 bg-white rounded-lg" style="z-index:10000;">
-          <h2 class="text-center my-4 font-bold text-xl">Regenerate your ephemereal key</h2>
+          <h2 class="text-center my-4 font-bold text-xl">Regenerate your session key</h2>
           <p class="text-sm text-center">Your temp key will soon expire</p>
           <p class="text-center">
-            <button v-if="regenerateModalStep!=='ok'" class="bg-yellow-500 my-4 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="regenerateModalStep !== 'waiting'"
+            <button v-if="regenerateModalStep!=='ok'" class="bg-gradient-to-b from-yellow-100 via-yellow-200 to-yellow-600 my-4 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="regenerateModalStep !== 'waiting'"
               @click="regenerateKeyPrompt">
               Regenerate Key
             </button>
-            <button v-if="regenerateModalStep==='ok'" class="bg-green-500 my-4 px-2 py-1 rounded-lg" :disabled="true">
+            <button v-if="regenerateModalStep==='ok'" class="bg-gradient-to-b from-lime-100 via-lime-200 to-lime-600 my-4 px-2 py-1 rounded-lg" :disabled="true">
               Key regenerated
             </button>
           </p>
