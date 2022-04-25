@@ -99,11 +99,33 @@ export default defineComponent({
                 entrypoint: "get_nonce",
                 calldata: [],
             })).result[0], 16);
+            /*
             let tx = await account.execute(
                 [{
-                    contractAddress: ACCOUNT_CONTRACT,
-                    entrypoint: "is_valid_signature",
-                    calldata: [],
+                    contractAddress: SESSION_CONTRACT,
+                    entrypoint: "get_session_key",
+                    calldata: [toBN(ACCOUNT_CONTRACT).toString()],
+                }],
+                undefined,
+                {
+                    nonce: nonce,
+                    maxFee: 0,
+                }
+            );*/
+            console.log(await starkvile.claim_worker());
+        },
+        async incrementNonce() {
+            let account = getSessionSigner();
+            let nonce = parseInt((await account.callContract({
+                contractAddress: ACCOUNT_CONTRACT,
+                entrypoint: "get_nonce",
+                calldata: [],
+            })).result[0], 16);
+            let tx = await account.execute(
+                [{
+                    contractAddress: SESSION_CONTRACT,
+                    entrypoint: "get_session_key",
+                    calldata: [toBN(ACCOUNT_CONTRACT).toString()],
                 }],
                 undefined,
                 {
@@ -111,7 +133,6 @@ export default defineComponent({
                     maxFee: 0,
                 }
             );
-            console.log(tx);
         }
     }
 })
