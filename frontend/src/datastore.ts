@@ -1,3 +1,3 @@
 import { reactive } from 'vue'
 
-export var gruntPos = reactive({ x: 5, y: 500 })
+export var gruntPos = reactive({ x: 500, y: 500 })

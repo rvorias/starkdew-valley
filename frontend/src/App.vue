@@ -7,7 +7,7 @@ import grunt from './components/grunt.vue'
 </script>
 
 <template>
-  <div id="app" @click="moveGrunt">
+  <div id="app">
     <grunt></grunt>
   </div>
 </template>
@@ -16,10 +16,14 @@ import grunt from './components/grunt.vue'
 import { gruntPos } from '@/datastore';
 
 export default {
+  mounted () {
+    window.addEventListener('keydown', this.moveGrunt);
+  },
   methods: {
-    moveGrunt(event: MouseEvent) {
-      gruntPos.x = event.clientX;
-      gruntPos.y = event.clientY;
+    moveGrunt(event: KeyboardEvent) {
+      const gruntSpeed = 20;
+      gruntPos.x = gruntPos.x + gruntSpeed*(event.key === 'd') - gruntSpeed*(event.key === 'a');
+      gruntPos.y = gruntPos.y + gruntSpeed*(event.key === 's') - gruntSpeed*(event.key === 'w');;
     }
   }
 };
