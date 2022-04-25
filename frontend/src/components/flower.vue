@@ -46,7 +46,7 @@ export default {
 		styles () {
 
             var mappedStage = 0;
-            const scalingFactor = 500;
+            const scalingFactor = 350;
 
             if (this.stage < scalingFactor) {
                 mappedStage = 0;
@@ -57,11 +57,11 @@ export default {
             else if (this.stage < scalingFactor*3) {
                 mappedStage = 2;
             }
-            else if (this.stage < scalingFactor*4) {
-                mappedStage = 4;
+            else if (this.stage < scalingFactor*5) {
+                mappedStage = 3;
             }
             else {
-                mappedStage = 5;
+                mappedStage = 4;
             }
 
 			return {

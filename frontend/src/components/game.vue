@@ -22,7 +22,7 @@ import tilemap from "../assets/Atlas/tilemap.png"
 <script lang="ts">
 import { starkvile } from '@/composables/contract'
 
-import { gruntState, controller } from '@/datastore';
+import { gruntState, controller, weedStats } from '@/datastore';
 
 export default {
   data() {
@@ -75,6 +75,13 @@ export default {
             // Use flower.x, flower.y
             var index = this.flower_coords.indexOf(flower);
               if (index !== -1) {
+                console.log(flower.stage);
+                weedStats.number_of_harvests += 1;
+                let stage = parseInt(flower.stage/350);
+                if (stage > 4) {
+                  stage = 0;
+                }
+                weedStats.total_yield += Math.pow(2, stage)-1;
                 this.flower_coords.splice(index, 1);
             }
           }
