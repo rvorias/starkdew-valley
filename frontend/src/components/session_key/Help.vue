@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white relative top-[1000px]">
+    <div class="bg-white">
         <h1>ToTo</h1>
         <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
         <p><button @click.stop="doSomething" class="bg-gray-500">Do Something</button></p>
@@ -41,19 +41,19 @@ export default defineComponent({
             return signer;
         },
         async setSessionContract() {
-            let account = this.getSigner();
+            let account = getSessionSigner();
             let nonce = parseInt((await account.callContract({
                 contractAddress: ACCOUNT_CONTRACT,
                 entrypoint: "get_nonce",
                 calldata: [],
             })).result[0], 16);
             console.log("Calling set_session_key_contract")
-            let tx = await account.execute(
-                [{
+            let tx = await account.invokeFunction(
+                {
                     contractAddress: ACCOUNT_CONTRACT,
                     entrypoint: "set_session_key_contract",
                     calldata: [SESSION_CONTRACT],
-                }],
+                },
                 undefined,
                 {
                     nonce: nonce,
@@ -63,18 +63,19 @@ export default defineComponent({
             console.log(tx);
         },
         async setSessionKey() {
-            let account = this.getSigner();
+            let account = getSessionSigner();
             let nonce = parseInt((await account.callContract({
                 contractAddress: ACCOUNT_CONTRACT,
                 entrypoint: "get_nonce",
                 calldata: [],
             })).result[0], 16);
-            let tx = await account.execute(
-                [{
+            console.log(account);
+            let tx = await account.invokeFunction(
+                {
                     contractAddress: ACCOUNT_CONTRACT,
                     entrypoint: "set_session_key",
-                    calldata: [SESSION_PRIVATE_KEY, 0],
-                }],
+                    calldata: [await account.signer.getPubKey(), 0],
+                },
                 undefined,
                 {
                     nonce: nonce,
@@ -92,17 +93,16 @@ export default defineComponent({
             }).then(x => { console.log(x.result); this.sessionKeyData = x.result.join(' ') });
         },
         async doSomething() {
-            let account = this.getSigner();
+            let account = getSessionSigner();
             let nonce = parseInt((await account.callContract({
                 contractAddress: ACCOUNT_CONTRACT,
                 entrypoint: "get_nonce",
                 calldata: [],
             })).result[0], 16);
-            let session = getSessionSigner();
-            let tx = await session.execute(
+            let tx = await account.execute(
                 [{
                     contractAddress: ACCOUNT_CONTRACT,
-                    entrypoint: "get_signer",
+                    entrypoint: "is_valid_signature",
                     calldata: [],
                 }],
                 undefined,
