@@ -4,17 +4,26 @@
 </script>
 
 <template>
-    <div class="grunt" v-bind:style="styles">
-
+    <div class="grunt" :style="styles">
     </div>
 </template>
 
+<style>
+.grunt {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background: url('https://res.cloudinary.com/picturesbase/image/upload/v1465832954/sprite_f5cw4a.png') -314px -8px;
+}
+</style>
+
+
 <script lang="ts">
+import { gruntPos } from '@/datastore';
+
 export default {
 	data () {
 		return {
-			x:              50,
-			y:              50,
 			animationName:  '',
 			transitionTime: 0
 		}
@@ -23,7 +32,7 @@ export default {
 	computed: {
 		styles () {
 			return {
-				transform:  `translate3d(${this.x - 25}px, ${this.y - 25}px, 0)`,
+				transform:  `translate3d(${gruntPos.x - 25}px, ${gruntPos.y - 25}px, 0)`,
 				transition: `all ${this.transitionTime}s linear`,
 				animation:  `${this.animationName} .8s steps(4) infinite`,
 			}
@@ -48,40 +57,7 @@ export default {
 			this.animationName  = `walk-${direction}`;
 			this.transitionTime = Math.sqrt(xDist * xDist + yDist * yDist) / 75;
 
-			this.speak();
 		}
 	},
-
-	ready () {
-		this.$el.addEventListener("transitionend", () => {
-			this.animationName = '';
-		}, false);
-
-		// Private methods
-
-		this.speak = function() {
-			var audioElement = document.createElement('audio');
-			var tracks       = [ 'https://res.cloudinary.com/picturesbase/video/upload/ac_mp3/v1465834936/grunt7_r4oygy.mp3',  'https://res.cloudinary.com/picturesbase/video/upload/ac_mp3/v1465834935/grunt3_lngkuu.mp3', 'https://res.cloudinary.com/picturesbase/video/upload/ac_mp3/v1465834936/grunt2_r3kqr7.mp3'];
-			var track        = tracks[Math.floor(Math.random() * tracks.length)];
-
-			audioElement.setAttribute('src', track);
-			audioElement.play();
-		};
-
-		this.getCardinal = function(angle) {
-			var directions = ["SE", "S", "SW", "W", "NW", "N", "NE", "E"];
-			var index      = angle - 22.5;
-			index < 0      && (index += 360);
-			index          = parseInt(index / 45);
-
-			return(directions[index]);
-		};
-	},
-
-	events: {
-		'mapClick': function(coords) {
-			this.move(coords.x, coords.y);
-		}
-	}
 }
 </script>

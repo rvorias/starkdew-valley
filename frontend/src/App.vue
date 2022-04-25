@@ -7,10 +7,23 @@ import grunt from './components/grunt.vue'
 </script>
 
 <template>
-  <div id="app">
-  <grunt></grunt>
+  <div id="app" @click="moveGrunt">
+    <grunt></grunt>
   </div>
 </template>
+
+<script lang="ts">
+import { gruntPos } from '@/datastore';
+
+export default {
+  methods: {
+    moveGrunt(event: MouseEvent) {
+      gruntPos.x = event.clientX;
+      gruntPos.y = event.clientY;
+    }
+  }
+};
+</script>
 
 <style>
 #app, html, body {
@@ -25,13 +38,6 @@ import grunt from './components/grunt.vue'
   position: relative;
   width: 100%;
   height: 100%;
-}
-
-.grunt {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  background: url('https://res.cloudinary.com/picturesbase/image/upload/v1465832954/sprite_f5cw4a.png') -314px -8px;
 }
 
 .pointer {
