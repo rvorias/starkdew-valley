@@ -6,12 +6,13 @@ import flower from './flower.vue'
 import scene from './scene.vue'
 import farm from './farm.vue'
 import ui from './ui.vue'
+import tilemap from "../assets/Atlas/tilemap.png"
 </script>
 
 <template>
-  <div id="game" @click="handleClick">
+  <div id="game" @click="handleClick" :style="{ background: `url(${tilemap})` }">
       <scene></scene>
-      <farm></farm>
+      <!-- <farm></farm> -->
       <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="flower.stage"></flower>
       <ui></ui>
@@ -150,9 +151,8 @@ export default {
 
 <style>
 #game {
-    width: 1200px;
-    height: 1200px;
-    background: url('https://res.cloudinary.com/picturesbase/image/upload/v1465832953/tile_bd8hxf.png');
+    width: 1184px;
+    height: 640px;
     cursor: url('https://res.cloudinary.com/picturesbase/image/upload/v1465832953/cursor_ubpicr.png'), pointer;
 }
 .field {

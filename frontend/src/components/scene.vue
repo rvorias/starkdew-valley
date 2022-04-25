@@ -1,13 +1,13 @@
 <template>
     <div class="scene">
-        <tree :x_coord="50" :y_coord="50"></tree>
+        <!-- <tree :x_coord="50" :y_coord="50"></tree>
         <tree :x_coord="100" :y_coord="300"></tree>
         <tree :x_coord="500" :y_coord="50"></tree>
         <tree :x_coord="200" :y_coord="450"></tree>
         <tree :x_coord="900" :y_coord="50"></tree>
         <tree :x_coord="500" :y_coord="200"></tree>
         <rock :x_coord="400" :y_coord="50"></rock>
-        <rock :x_coord="1100" :y_coord="200"></rock>
+        <rock :x_coord="1100" :y_coord="200"></rock> -->
     </div>
 </template>
 
