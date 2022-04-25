@@ -11,4 +11,32 @@ window.gsw = true;
 
 import AppAsync from './AppAsync.vue'
 
-createApp(AppAsync).mount('#app')
+let app = createApp(AppAsync);
+
+// Routing
+
+import { createWebHistory, createRouter } from "vue-router";
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {
+            path: "/",
+            name: "HomeA",
+            component: async () => await import('@/HomeA.vue'),
+        },
+        {
+            path: "/homeB",
+            name: "HomeB",
+            component: async () => await import('@/HomeB.vue'),
+        },
+        {
+            path: "/game",
+            name: "game",
+            component: async () => await import('@/GamePage.vue'),
+        },
+    ]
+});
+app.use(router);
+
+
+app.mount('#app')

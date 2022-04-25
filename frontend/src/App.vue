@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import game from './components/game.vue'
-import Help from './components/session_key/Help.vue';
 </script>
 
 <template>
-    <div id="app">
-        <game></game>
-        <Help></Help>
+    <div id="app" class="min-h-screen min-w-screen flex justify-center items-center">
+        <router-view/>
     </div>
 </template>
 
@@ -14,5 +11,10 @@ import Help from './components/session_key/Help.vue';
 </script>
 
 <style>
-
+#app {
+    background: black;
+}
+* {
+    @apply text-lg font-semibold;
+}
 </style>
