@@ -19,7 +19,7 @@ import tilemap from "../assets/Atlas/tilemap.png"
 
       <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
         <div class="p-4 bg-white rounded-lg relative" style="z-index:10000;">
-          <button class="absolute top-2 right-2 text-xs" @click="regenerateModalStep = 'nok'; setTimeout(() => regenerateModalStep = 'waiting', 60000)">Close</button>
+          <button class="absolute top-2 right-2 text-xs" @click="pushBackModal">Close</button>
           <h2 class="text-center my-4 font-bold text-xl">Regenerate your ephemereal key</h2>
           <p class="text-sm text-center">Your temp key will soon expire</p>
           <p class="text-center">
@@ -62,7 +62,7 @@ export default {
     let raw_coords = await starkvile.getAllFarms()
 
     raw_coords[0].map((a, index) => {
-      this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: 3000, idx: index })
+      this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: 3000, idx: raw_coords[0].length - index - 1 })
     })
 
     this.flower_idx = raw_coords[0].length
@@ -86,6 +86,10 @@ export default {
       await settingKey;
       this.regenerateModalStep = 'ok';
       setTimeout(() => this.regenerateModalStep = 'nok', 3000)
+    },
+    async pushBackModal() {
+      this.regenerateModalStep = 'nok';
+      setTimeout(() => this.regenerateModalStep = 'waiting', 60000)
     },
     distance(x1, y1, x2, y2) {
       var distance = Math.sqrt((Math.pow(x1-x2,2))+(Math.pow(y1-y2,2)))
@@ -129,9 +133,8 @@ export default {
             // Use flower.x, flower.y
             var index = this.flower_coords.indexOf(flower);
               if (index !== -1) {
-                console.log(flower.stage);
                 weedStats.number_of_harvests += 1;
-                let build_farm = await starkvile.claim_resources(this.flower_idx, Math.round(flower.x), Math.round(flower.y))
+                let build_farm = await starkvile.claim_resources(flower.idx, Math.round(flower.x), Math.round(flower.y))
 
                 console.log(build_farm)
 
