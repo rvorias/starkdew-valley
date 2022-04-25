@@ -9,6 +9,6 @@ window.Buffer = {
 };
 window.gsw = true;
 
-import App from './App.vue'
+import AppAsync from './AppAsync.vue'
 
-createApp(App).mount('#app')
+createApp(AppAsync).mount('#app')

@@ -19,13 +19,18 @@
 
 
 <script lang="ts">
-    import { ref } from 'vue'
-    import tree from './atlas/tree.vue'
-    import rock from './atlas/rock.vue'
-    import plot from './atlas/plot.vue'
-    export default {
-        data () {
-            return {}
-        }
+import { ref } from 'vue'
+import tree from './atlas/tree.vue'
+import rock from './atlas/rock.vue'
+import plot from './atlas/plot.vue'
+export default {
+    data () {
+        return {}
+    },
+    components: {
+        tree,
+        rock,
+        plot
     }
+}
 </script>
