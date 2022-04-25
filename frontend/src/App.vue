@@ -13,9 +13,9 @@ import HelpAsync from './components/session_key/HelpAsync.vue';
   <div id="app" @click="handleClick">
       <scene></scene>
       <farm></farm>
-      <HelpAsync></HelpAsync>
       <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
+      <HelpAsync></HelpAsync>
   </div>
 </template>
 
