@@ -135,7 +135,7 @@ export default {
 
                 console.log(build_farm)
 
-                let stage = parseInt(flower.stage/350);
+                let stage = parseInt(flower.stage/200);
                 if (stage > 4) {
                   stage = 0;
                 }

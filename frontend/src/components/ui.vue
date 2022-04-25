@@ -5,8 +5,9 @@
 
 <template>
     <div class="ui-frame">
-        <p>Number of harvests: {{ weedStats.number_of_harvests }}</p>
-        <p>Total yield: {{ weedStats.total_yield }}</p>
+        <p>Nº Harvests: {{ weedStats.number_of_harvests }}</p>
+        <p>Total Yield: {{ weedStats.total_yield }}</p>
+        <p>Nº Transactions: </p>
     </div>
 </template>
 
