@@ -19,12 +19,11 @@
 
 
 <script lang="ts">
-import { gruntPos } from '@/datastore';
+import { gruntState } from '@/datastore';
 
 export default {
 	data () {
 		return {
-			animationName:  '',
 			transitionTime: 0
 		}
 	},
@@ -32,9 +31,9 @@ export default {
 	computed: {
 		styles () {
 			return {
-				transform:  `translate3d(${gruntPos.x - 25}px, ${gruntPos.y - 25}px, 0)`,
+				transform:  `translate3d(${gruntState.x - 25}px, ${gruntState.y - 25}px, 0)`,
 				transition: `all ${this.transitionTime}s linear`,
-				animation:  `${this.animationName} .8s steps(4) infinite`,
+				animation:  `${gruntState	.animationName} .8s steps(4) infinite`,
 			}
 		}
 	},

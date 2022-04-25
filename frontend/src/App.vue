@@ -13,17 +13,80 @@ import grunt from './components/grunt.vue'
 </template>
 
 <script lang="ts">
-import { gruntPos } from '@/datastore';
+import { gruntState, controller } from '@/datastore';
 
 export default {
   mounted () {
-    window.addEventListener('keydown', this.moveGrunt);
+    window.addEventListener('keydown', this.handleControlDown);
+    window.addEventListener('keyup', this.handleControlUp);
+    setInterval(this.moveGrunt, 1);
   },
   methods: {
-    moveGrunt(event: KeyboardEvent) {
-      const gruntSpeed = 20;
-      gruntPos.x = gruntPos.x + gruntSpeed*(event.key === 'd') - gruntSpeed*(event.key === 'a');
-      gruntPos.y = gruntPos.y + gruntSpeed*(event.key === 's') - gruntSpeed*(event.key === 'w');;
+    handleControlDown(event: KeyboardEvent) {
+      if (event.key === 'w') {
+        controller.up = true;
+      }
+      if (event.key === 'a') {
+        controller.left = true;
+      }
+      if (event.key === 's') {
+        controller.down = true;
+      }
+      if (event.key === 'd') {
+        controller.right = true;
+      }
+    },
+    handleControlUp(event: KeyboardEvent) {
+      if (event.key === 'w') {
+        controller.up = false;
+      }
+      if (event.key === 'a') {
+        controller.left = false;
+      }
+      if (event.key === 's') {
+        controller.down = false;
+      }
+      if (event.key === 'd') {
+        controller.right = false;
+      }
+    },
+    moveGrunt() {
+      const gruntSpeed = 1;
+
+      gruntState.x = gruntState.x + gruntSpeed*( controller.right - controller.left );
+      gruntState.y = gruntState.y + gruntSpeed*( controller.down - controller.up );
+
+      if (controller.right) {
+        if (controller.up) {
+          gruntState.animationName='walk-NE';
+        }
+        else if (controller.down) {
+          gruntState.animationName='walk-SE';
+        }
+        else {
+          gruntState.animationName='walk-E';
+        }
+      }
+      else if (controller.left) {
+        if (controller.up) {
+          gruntState.animationName='walk-NW';
+        }
+        else if (controller.down) {
+          gruntState.animationName='walk-SW';
+        }
+        else {
+          gruntState.animationName='walk-W';
+        }
+      }
+      else if (controller.up) {
+        gruntState.animationName='walk-N';
+      }
+      else if (controller.up) {
+        gruntState.animationName='walk-S';
+      }
+      else {
+        gruntState.animationName='';
+      }
     }
   }
 };
