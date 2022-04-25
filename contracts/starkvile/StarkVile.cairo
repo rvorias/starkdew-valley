@@ -94,7 +94,7 @@ func players_wheat(address : felt) -> (value : felt):
 end
 
 # GET WORKERS
-@external
+@view
 func get_workers{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(address: felt) -> (workers : felt):
     alloc_locals
     let (workers) = players_workers.read(address)
@@ -102,7 +102,7 @@ func get_workers{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
 end
 
 # GET WORKERS
-@external
+@view
 func get_wheat{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(address: felt) -> (wheat : felt):
     alloc_locals
     let (wheat) = players_wheat.read(address)

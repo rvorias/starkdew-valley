@@ -20,6 +20,7 @@
                     "type": "felt"
                 }
             ],
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -36,6 +37,7 @@
                     "type": "felt"
                 }
             ],
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -33172,7 +33174,7 @@
             },
             "__main__.get_wheat": {
                 "decorators": [
-                    "external"
+                    "view"
                 ],
                 "pc": 562,
                 "type": "function"
@@ -33323,7 +33325,7 @@
             },
             "__main__.get_workers": {
                 "decorators": [
-                    "external"
+                    "view"
                 ],
                 "pc": 526,
                 "type": "function"
@@ -36339,7 +36341,7 @@
             },
             "__wrappers__.get_wheat": {
                 "decorators": [
-                    "external"
+                    "view"
                 ],
                 "pc": 580,
                 "type": "function"
@@ -36719,7 +36721,7 @@
             },
             "__wrappers__.get_workers": {
                 "decorators": [
-                    "external"
+                    "view"
                 ],
                 "pc": 544,
                 "type": "function"
