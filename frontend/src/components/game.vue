@@ -138,7 +138,7 @@ export default {
       else if (controller.up) {
         gruntState.animationName='walk-N';
       }
-      else if (controller.up) {
+      else if (controller.down) {
         gruntState.animationName='walk-S';
       }
       else {
