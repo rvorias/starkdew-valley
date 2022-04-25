@@ -13,7 +13,7 @@ import ui from './ui.vue'
       <scene></scene>
       <farm></farm>
       <grunt></grunt>
-      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
+      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="flower.stage"></flower>
       <ui></ui>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     window.addEventListener('keydown', this.handleControlDown);
     window.addEventListener('keyup', this.handleControlUp);
     setInterval(this.moveGrunt, 1);
-    setInterval(this.growWeed, 1);
+    setInterval(this.growWeed, 20);
   },
   methods: {
     distance(x1, y1, x2, y2) {
@@ -60,7 +60,7 @@ export default {
       if (harvestable == null) {
         // Plant flowers
         // Use gruntState.x, gruntState.y
-        this.flower_coords.push({x: gruntState.x, y: gruntState.y})
+        this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0})
       }
       else {
         this.flower_coords.forEach((flower, index) => {
@@ -104,7 +104,7 @@ export default {
       }
     },
     moveGrunt() {
-      const gruntSpeed = 0.3;
+      const gruntSpeed = 0.4;
 
       gruntState.x = gruntState.x + gruntSpeed*( controller.right - controller.left );
       gruntState.y = gruntState.y + gruntSpeed*( controller.down - controller.up );

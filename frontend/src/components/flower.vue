@@ -11,9 +11,9 @@
 <style>
 .flower {
   position: absolute;
-  height: 16px;
-  width: 16px;
-  background: url(../assets/big.png);
+  height: 32px;
+  width: 32px;
+  background: url(../assets/Atlas/weed_0.png);
 }
 </style>
 
@@ -28,7 +28,7 @@ export default {
     data () {
 		return {
 			plantStateImageMap: {
-                0: `url(${smol})`,
+                0: `url(${sprouts})`,
                 1: `url(${smol})`,
                 2: `url(${medium})`,
                 3: `url(${big})`,
@@ -42,9 +42,26 @@ export default {
     },
     computed: {
 		styles () {
+
+            var mappedStage = 0;
+            const scalingFactor = 500;
+
+            if (this.stage < scalingFactor) {
+                mappedStage = 0;
+            }
+            else if (this.stage < scalingFactor*2) {
+                mappedStage = 1;
+            }
+            else if (this.stage < scalingFactor*3) {
+                mappedStage = 2;
+            }
+            else {
+                mappedStage = 3;
+            }
+
 			return {
 				transform:  `translate3d(${this.x_coord - 8}px, ${this.y_coord - 8}px, 0)`,
-                background: this.plantStateImageMap[plantState.stage]
+                background: this.plantStateImageMap[mappedStage]
 			} 
 		}
 	}
