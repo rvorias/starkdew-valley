@@ -29,7 +29,7 @@
 
 export default {
 	data () {
-		return 0
+		return {}
 	}
 }
 </script>

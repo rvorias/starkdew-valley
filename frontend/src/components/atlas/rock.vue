@@ -1,5 +1,5 @@
 <template>
-    <div id="tree">
+    <div class="rock">
         <img src="../../assets/Atlas/rock_1.png" :style="styles">
     </div>
 </template>

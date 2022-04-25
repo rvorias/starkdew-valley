@@ -1,5 +1,5 @@
 <template>
-    <div id="tree">
+    <div class="tree">
         <img src="../../assets/Atlas/tree.png" :style="styles">
     </div>
 </template>
@@ -14,7 +14,8 @@
             styles () {
                 return {
                     position: 'absolute',
-                    transform:  `translate3d(${this.x_coord - 25}px, ${this.y_coord - 25}px, 0)`,
+                    left: `${this.x_coord - 25}px`,
+                    top: `${this.y_coord - 25}px`,
                 }
             }
         }
@@ -22,4 +23,7 @@
 </script>
     
 <style lang="css">
+.tree {
+    width: 96px;
+}
 </style> 
