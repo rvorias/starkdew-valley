@@ -14,5 +14,5 @@ export var controller = reactive({
 })
 
 export var plantState = reactive({
-    stage: 0,
+    stage: 2,
 })
