@@ -79,13 +79,7 @@ export default defineComponent({
                 entrypoint: "get_session_key",
                 calldata: [toBN(ACCOUNT_CONTRACT).toString()],
             })
-            const addr = await account.callContract({
-                contractAddress: ACCOUNT_CONTRACT,
-                entrypoint: "get_session_key_contract",
-                calldata: [],
-            })
-            this.sessionKeyData = key_data.result.join(' ') + "\n" + addr.result;
-
+            this.sessionKeyData = key_data.result.join(' ');
         },
         async doSomething() {
             let account = getSessionSigner();
