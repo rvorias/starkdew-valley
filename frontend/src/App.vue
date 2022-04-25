@@ -30,8 +30,27 @@ export default {
     setInterval(this.moveGrunt, 1);
   },
   methods: {
+    distance(x1, y1, x2, y2) {
+      var distance = Math.sqrt((Math.pow(x1-x2,2))+(Math.pow(y1-y2,2)))
+      return distance
+    },
+    getHarvestable() {
+      var harvestable_flower_coord = null
+
+      this.flower_coords.forEach((flower, index) => {
+        var curr_dist = this.distance(flower.x, flower.y, gruntState.x, gruntState.y)
+        if (curr_dist < 50) {
+          harvestable_flower_coord = flower
+        }
+      });
+      return harvestable_flower_coord
+    },
+
     handleClick(event: MouseEvent) {
-      this.flower_coords.push({x: gruntState.x, y: gruntState.y})
+      var harvestable = this.getHarvestable()
+      if (harvestable == null) {
+        this.flower_coords.push({x: gruntState.x, y: gruntState.y})
+      }
     },
     handleControlDown(event: KeyboardEvent) {
       if (event.key === 'w') {
