@@ -51,7 +51,19 @@ export default {
     handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
+        // Plant flowers
         this.flower_coords.push({x: gruntState.x, y: gruntState.y})
+      }
+      else {
+        this.flower_coords.forEach((flower, index) => {
+          if (harvestable.x == flower.x && harvestable.y == flower.y) {
+            // this is where you harvest flowers
+            var index = this.flower_coords.indexOf(flower);
+              if (index !== -1) {
+                this.flower_coords.splice(index, 1);
+            }
+          }
+        });
       }
     },
     handleControlDown(event: KeyboardEvent) {
