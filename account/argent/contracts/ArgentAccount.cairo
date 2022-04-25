@@ -160,14 +160,28 @@ func set_session_key_contract{
         ecdsa_ptr: SignatureBuiltin*,
         range_check_ptr
     } (
-        address: felt
+        address: felt,
+        nonce: felt
     ) -> ():
     let (origin) = _signer.read()
     let (caller_address) = get_caller_address()
     assert caller_address = origin
 
+    validate_and_bump_nonce(nonce)
+
     _session_key_contract.write(address)
     return ()
+end
+
+@view
+func get_session_key_contract{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        ecdsa_ptr: SignatureBuiltin*,
+        range_check_ptr
+    } () -> (address: felt):
+    let (rr) = _session_key_contract.read()
+    return (rr)
 end
 
 
@@ -179,8 +193,11 @@ func set_session_key{
         range_check_ptr
     } (
         session_key: felt,
-        time: felt
+        time: felt,
+        nonce: felt
     ) -> ():
+
+    validate_and_bump_nonce(nonce)
 
     let (addr) = _session_key_contract.read()
     ISessionKeyContract.set_session_key(addr, session_key, time)
@@ -198,7 +215,7 @@ func constructor{
         ecdsa_ptr: SignatureBuiltin*,
         range_check_ptr
     }():
-    _session_key_contract.write(0x0327ab3f2f94daf4f4b5eecf47130efc273b3f5a956f0442c7300a39d47ef02a)
+    _session_key_contract.write(0x000234ac595438ec1dbcac6572ef81a6ea3c79a73f9dab31477dac475ea12e13)
     return ()
 end
 

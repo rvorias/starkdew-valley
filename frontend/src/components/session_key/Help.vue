@@ -3,13 +3,20 @@
         <h1>ToTo</h1>
         <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
         <p><button @click.stop="doSomething" class="bg-gray-500">Do Something</button></p>
-        <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() }} {{ sessionKeyData }}</p>
+        <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() && false || '' }} {{ sessionKeyData }}</p>
     </div>
 </template>
 
 <script lang="ts">
 
-import { getSessionSigner, ACCOUNT_CONTRACT, ACCOUNT_PRIVATE_KEY, SESSION_CONTRACT, SESSION_PRIVATE_KEY } from '@/composables/session_signer';
+import {
+    setSessionKey,
+    getSessionSigner,
+    ACCOUNT_CONTRACT,
+    ACCOUNT_PRIVATE_KEY,
+    SESSION_CONTRACT,
+    SESSION_PRIVATE_KEY
+} from '@/composables/session_signer';
 
 import { makeSigner } from './Help';
 import { Provider, Account, getStarknet, toBN } from '@/starknet_wrapper'
@@ -52,7 +59,7 @@ export default defineComponent({
                 {
                     contractAddress: ACCOUNT_CONTRACT,
                     entrypoint: "set_session_key_contract",
-                    calldata: [SESSION_CONTRACT],
+                    calldata: [this.session_contract, nonce],
                 },
                 undefined,
                 {
@@ -63,34 +70,22 @@ export default defineComponent({
             console.log(tx);
         },
         async setSessionKey() {
-            let account = getSessionSigner();
-            let nonce = parseInt((await account.callContract({
-                contractAddress: ACCOUNT_CONTRACT,
-                entrypoint: "get_nonce",
-                calldata: [],
-            })).result[0], 16);
-            console.log(account);
-            let tx = await account.invokeFunction(
-                {
-                    contractAddress: ACCOUNT_CONTRACT,
-                    entrypoint: "set_session_key",
-                    calldata: [await account.signer.getPubKey(), 0],
-                },
-                undefined,
-                {
-                    nonce: nonce,
-                    maxFee: 0,
-                }
-            );
-            console.log(tx);
+            setSessionKey();
         },
-        getSessionKey() {
+        async getSessionKey() {
             let account = this.getSigner();
-            account.callContract({
+            const key_data = await account.callContract({
                 contractAddress: SESSION_CONTRACT,
                 entrypoint: "get_session_key",
                 calldata: [toBN(ACCOUNT_CONTRACT).toString()],
-            }).then(x => { console.log(x.result); this.sessionKeyData = x.result.join(' ') });
+            })
+            const addr = await account.callContract({
+                contractAddress: ACCOUNT_CONTRACT,
+                entrypoint: "get_session_key_contract",
+                calldata: [],
+            })
+            this.sessionKeyData = key_data.result.join(' ') + "\n" + addr.result;
+
         },
         async doSomething() {
             let account = getSessionSigner();
