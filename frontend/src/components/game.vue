@@ -60,7 +60,9 @@ export default {
     async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
-        await starkvile.claim_worker()
+        let build_farm = await starkvile.build_farm(gruntState.x,gruntState.y)
+
+        console.log(build_farm)
         // Plant flowers
         // Use gruntState.x, gruntState.y
         this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0})

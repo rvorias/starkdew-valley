@@ -3,7 +3,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin, BitwiseBuiltin
 from starkware.cairo.common.math import assert_nn_le, unsigned_div_rem, assert_not_zero, assert_not_equal
-from starkware.cairo.common.math_cmp import is_nn_le
+from starkware.cairo.common.math_cmp import is_nn_le, is_le
 from starkware.cairo.common.hash_state import hash_init, hash_update, HashState
 from starkware.cairo.common.alloc import alloc
 from starkware.starknet.common.syscalls import (
@@ -26,42 +26,6 @@ from starkware.cairo.common.uint256 import Uint256, uint256_eq
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
     return ()
 end
-
-
-# @external
-# func initializer{
-#         syscall_ptr : felt*,
-#         pedersen_ptr : HashBuiltin*,
-#         range_check_ptr
-#     }(proxy_admin: felt):
-#     Proxy_initializer(proxy_admin)
-#     return ()
-# end
-
-# @external
-# func upgrade{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-#     new_implementation : felt
-# ):
-#     Proxy_only_admin()
-#     Proxy_set_implementation(new_implementation)
-#     return ()
-# end
-
-# @view
-# func get_implementation{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-#     address : felt
-# ):
-#     let (address) = Proxy_get_implementation()
-#     return (address)
-# end
-
-# @view
-# func get_admin{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-#     admin : felt
-# ):
-#     let (admin) = Proxy_get_admin()
-#     return (admin)
-# end
 
 ############
 # EXTERNAL #
@@ -109,6 +73,39 @@ func get_wheat{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
     return (wheat=wheat)
 end
 
+func _allFarms{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    } (index: felt, farm_output: Farm*) -> (total_farms: Farm*):
+    
+    if index == 0:
+        return (farm_output)
+    end
+
+    let (farm) = farms.read(index - 1)
+
+    assert farm_output.plant_time = farm.plant_time
+    assert farm_output.owner = farm.owner
+    assert farm_output.x_coord = farm.x_coord
+    assert farm_output.y_coord = farm.y_coord
+
+    return _allFarms(index - 1, farm_output + Farm.SIZE)
+end
+
+@view
+func getAllFarms{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }() -> (farms_len: felt, farms: Farm*):
+    alloc_locals
+    let (local farms: Farm*) = alloc()
+    let (total_farms) = farm_counter.read()
+    let (all_farms) = _allFarms(total_farms, farms)
+    return ((all_farms - farms) / Farm.SIZE, farms)
+end 
+
 # CLAIMS WORKER
 @external
 func claim_worker{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (success : felt):
@@ -150,6 +147,8 @@ func build_farm{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 
     farms.write(farm_number, Farm(planting_time, caller, x_coord, y_coord))
 
+    farm_counter.write(farm_number + 1)
+
     return (1)
 end
 
@@ -175,12 +174,19 @@ farm_id: felt, x_coord: felt, y_coord: felt) -> (success : felt):
 
     let claimable = available * CLAIM_AMOUNT
 
-    let (current_balance) = players_wheat.read(caller)
+    let (less_than) = is_le(available, 5)
 
-    # return remainder
+    if less_than == 1:
+        let (current_balance) = players_wheat.read(caller)
+
+        # return remainder
+        farms.write(farm_id, Farm(block_timestamp - remainder, caller, x_coord, y_coord))
+
+        players_wheat.write(caller, current_balance + claimable)
+        return (1)
+    end
+    
     farms.write(farm_id, Farm(block_timestamp - remainder, caller, x_coord, y_coord))
-
-    players_wheat.write(caller, current_balance + claimable)
 
     return (1)
 end
