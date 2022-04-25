@@ -16,4 +16,5 @@ export var controller = reactive({
 export var weedStats = reactive({
     number_of_harvests: 0,
     total_yield: 0,
+    idx: 0
 })
