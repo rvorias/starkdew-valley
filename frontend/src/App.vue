@@ -5,6 +5,7 @@ import grunt from './components/grunt.vue'
 import flower from './components/flower.vue'
 import scene from './components/scene.vue'
 import farm from './components/farm.vue'
+import ui from './components/ui.vue'
 
 import HelpAsync from './components/session_key/HelpAsync.vue';
 </script>
@@ -16,6 +17,7 @@ import HelpAsync from './components/session_key/HelpAsync.vue';
       <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
       <HelpAsync></HelpAsync>
+      <ui></ui>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ import { gruntState, controller } from '@/datastore';
 export default {
   data() {
     return {
-      flower_coords: [{ x: 100, y: 100}, {x:500, y:500}]
+      flower_coords: []
     }
   },
 
@@ -33,6 +35,7 @@ export default {
     window.addEventListener('keydown', this.handleControlDown);
     window.addEventListener('keyup', this.handleControlUp);
     setInterval(this.moveGrunt, 1);
+    setInterval(this.growWeed, 1);
   },
   methods: {
     distance(x1, y1, x2, y2) {
@@ -50,7 +53,11 @@ export default {
       });
       return harvestable_flower_coord
     },
-
+    growWeed() {
+      this.flower_coords.forEach( flower => {
+        flower.stage = flower.stage + 1
+      })
+    },
     handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
@@ -100,7 +107,7 @@ export default {
       }
     },
     moveGrunt() {
-      const gruntSpeed = 1;
+      const gruntSpeed = 0.3;
 
       gruntState.x = gruntState.x + gruntSpeed*( controller.right - controller.left );
       gruntState.y = gruntState.y + gruntSpeed*( controller.down - controller.up );

@@ -19,23 +19,26 @@
 
 <script lang="ts">
 import { plantState } from '@/datastore';
-import smol from "../assets/smol.png?url";
-import medium from "../assets/medium.png?url";
-import big from "../assets/big.png?url";
+import sprouts from "../assets/Atlas/weed_0.png?url"
+import smol from "../assets/Atlas/weed_1.png?url"
+import medium from "../assets/Atlas/weed_2.png?url"
+import big from "../assets/Atlas/weed_3.png?url"
 
 export default {
     data () {
 		return {
 			plantStateImageMap: {
                 0: `url(${smol})`,
-                1: `url(${medium})`,
-                2: `url(${big})`,
+                1: `url(${smol})`,
+                2: `url(${medium})`,
+                3: `url(${big})`,
             }
 		}
 	},
     props: {
         x_coord: Number, 
-        y_coord: Number
+        y_coord: Number,
+        stage: Number,
     },
     computed: {
 		styles () {
