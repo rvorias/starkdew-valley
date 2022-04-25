@@ -10,12 +10,16 @@ import tilemap from "../assets/Atlas/tilemap.png"
 </script>
 
 <template>
-  <div id="game" @click="handleClick" :style="{ background: `url(${tilemap})` }">
+  <div id="game" @click="handleClick" class="relative" :style="{ background: `url(${tilemap})` }">
       <scene></scene>
       <!-- <farm></farm> -->
       <grunt></grunt>
-      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="flower.stage"></flower>
+      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="Math.floor(flower.stage / 1000 / 60)"></flower>
       <ui></ui>
+
+      <div class="absolute bottom-0">
+        <p v-for="mess of messages.mess"> {{ mess }}</p>
+      </div>
 
       <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
         <div class="p-4 bg-white rounded-lg relative" style="z-index:10000;">
@@ -42,7 +46,7 @@ import tilemap from "../assets/Atlas/tilemap.png"
 import { starkvile } from '@/composables/contract'
 import { getStarknet } from 'get-starknet';
 import { setSessionKey } from '@/composables/session_signer';
-import { gruntState, controller, weedStats } from '@/datastore';
+import { gruntState, controller, weedStats, messages } from '@/datastore';
 
 export default {
   data() {
@@ -60,10 +64,12 @@ export default {
     setInterval(this.growWeed, 20);
 
     let raw_coords = await starkvile.getAllFarms()
-
-    raw_coords[0].map((a, index) => {
-      this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: 3000, idx: raw_coords[0].length - index - 1 })
+    raw_coords.farms.map((a, index) => {
+      const age = Math.round(Date.now() / 1000 -  a.plant_time.toString());
+      this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: age * 1000, idx: raw_coords[0].length - index - 1 })
     })
+
+    console.log(this.flower_coords);
 
     this.flower_idx = raw_coords[0].length
 
@@ -108,7 +114,7 @@ export default {
     },
     growWeed() {
       this.flower_coords.forEach( flower => {
-        flower.stage = flower.stage + 1
+        flower.stage = flower.stage + 20;
       })
     },
     async handleClick(event: MouseEvent) {
@@ -124,7 +130,8 @@ export default {
         // Use gruntState.x, gruntState.y
         this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0, index: this.flower_idx})
 
-        this.flower_idx++
+        this.flower_idx++;
+        messages.mess.push("Flower planted");
       }
       else {
         this.flower_coords.forEach(async (flower, index) => {
@@ -138,12 +145,13 @@ export default {
 
                 console.log(build_farm)
 
-                let stage = parseInt(flower.stage/200);
+                let stage = parseInt(flower.stage/1000/60);
                 if (stage > 4) {
                   stage = 0;
                 }
                 weedStats.total_yield += Math.pow(2, stage)-1;
                 this.flower_coords.splice(index, 1);
+                messages.mess.push("Flower harvested");
             }
           }
         });

@@ -18,3 +18,7 @@ export var weedStats = reactive({
     total_yield: 0,
     idx: 0
 })
+
+export var messages = reactive({
+    mess: []
+})
