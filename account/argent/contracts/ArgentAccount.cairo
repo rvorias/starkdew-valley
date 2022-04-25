@@ -7,7 +7,7 @@ from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.memcpy import memcpy
 from starkware.cairo.common.math import assert_not_zero, assert_le, assert_nn
 from starkware.starknet.common.syscalls import (
-    call_contract, get_tx_info, get_contract_address, get_caller_address, get_block_timestamp
+    call_contract, get_tx_info, get_contract_address, get_caller_address, get_block_timestamp, TxInfo
 )
 from starkware.cairo.common.hash_state import (
     hash_init, hash_finalize, hash_update, hash_update_single
@@ -146,7 +146,7 @@ namespace ISessionKeyContract:
         nonce: felt):
     end
 
-    func set_session_key(session_key: felt, time: felt) -> ():
+    func set_session_key(session_key: felt, time: felt, contract: felt, selector: felt) -> ():
     end
 
 end
@@ -173,18 +173,6 @@ func set_session_key_contract{
     return ()
 end
 
-@view
-func get_session_key_contract{
-        syscall_ptr: felt*,
-        pedersen_ptr: HashBuiltin*,
-        ecdsa_ptr: SignatureBuiltin*,
-        range_check_ptr
-    } () -> (address: felt):
-    let (rr) = _session_key_contract.read()
-    return (rr)
-end
-
-
 @external
 func set_session_key{
         syscall_ptr: felt*,
@@ -194,13 +182,15 @@ func set_session_key{
     } (
         session_key: felt,
         time: felt,
+        contract: felt,
+        selector: felt,
         nonce: felt
     ) -> ():
 
     validate_and_bump_nonce(nonce)
 
     let (addr) = _session_key_contract.read()
-    ISessionKeyContract.set_session_key(addr, session_key, time)
+    ISessionKeyContract.set_session_key(addr, session_key, time, contract, selector)
     return ()
 end
 
@@ -215,7 +205,7 @@ func constructor{
         ecdsa_ptr: SignatureBuiltin*,
         range_check_ptr
     }():
-    _session_key_contract.write(0x000234ac595438ec1dbcac6572ef81a6ea3c79a73f9dab31477dac475ea12e13)
+    _session_key_contract.write(0x029465e3034104d96125681db6fb66d36c3b691369bf7b4767536da9bd86b6c2)
     return ()
 end
 
@@ -275,26 +265,7 @@ func __execute__{
     # get the tx info
     let (tx_info) = get_tx_info()
 
-    # Commented out - revoked reference pain
-    #if calls_len == 1:
-    #    if calls[0].to == tx_info.account_contract_address:
-    #        tempvar signer_condition = (calls[0].selector - ESCAPE_GUARDIAN_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_GUARDIAN_SELECTOR)
-    #        tempvar guardian_condition = (calls[0].selector - ESCAPE_SIGNER_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_SIGNER_SELECTOR)
-    #        if signer_condition == 0:
-    #            # validate signer signature
-    #            validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
-    #            jmp do_execute
-    #        end
-    #        if guardian_condition == 0:
-    #            # validate guardian signature
-    #            validate_guardian_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
-    #            jmp do_execute
-    #        end
-    #    end
-    #else:
-    #    # make sure no call is to the account
-    #    assert_no_self_call(tx_info.account_contract_address, calls_len, calls)
-    #end
+    validate_self_calls(tx_info, calls_len, calls)
 
     let (contract) = _session_key_contract.read()
     ISessionKeyContract.authenticate_maybe(
@@ -307,11 +278,11 @@ func __execute__{
     )
 
     # validate signer and guardian signatures
+    # Commented out - can't be done with cairo right now.
     #validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
     #validate_guardian_signature(tx_info.transaction_hash, tx_info.signature + 2, tx_info.signature_len - 2)
 
     # execute calls
-    do_execute:
     local ecdsa_ptr: SignatureBuiltin* = ecdsa_ptr
     local range_check_ptr = range_check_ptr
     local pedersen_ptr: HashBuiltin* = pedersen_ptr
@@ -324,6 +295,38 @@ func __execute__{
     # emit event
     transaction_executed.emit(hash=tx_info.transaction_hash, response_len=response_len, response=response)
     return (retdata_size=response_len, retdata=response)
+end
+
+func validate_self_calls{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        ecdsa_ptr: SignatureBuiltin*,
+        range_check_ptr
+    } (
+        tx_info: TxInfo*,
+        calls_len: felt,
+        calls : Call*
+    ):
+    if calls_len == 1:
+        if calls[0].to == tx_info.account_contract_address:
+            tempvar signer_condition = (calls[0].selector - ESCAPE_GUARDIAN_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_GUARDIAN_SELECTOR)
+            tempvar guardian_condition = (calls[0].selector - ESCAPE_SIGNER_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_SIGNER_SELECTOR)
+            if signer_condition == 0:
+                # validate signer signature
+                validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
+                return ()
+            end
+            if guardian_condition == 0:
+                # validate guardian signature
+                validate_guardian_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
+                return ()
+            end
+        end
+    else:
+        # make sure no call is to the account
+        assert_no_self_call(tx_info.account_contract_address, calls_len, calls)
+    end
+    return ()
 end
 
 @external

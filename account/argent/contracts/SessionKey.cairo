@@ -22,8 +22,7 @@ struct KeyConf:
     member time: felt
     member timestamp_start: felt
     member contract: felt
-    member total_value: felt
-    member acc_value: felt
+    member selector: felt
 end
 
 
@@ -44,14 +43,16 @@ func set_session_key{
         range_check_ptr
     } (
         session_key: felt,
-        time: felt
+        time: felt,
+        contract: felt,
+        selector: felt,
     ) -> ():
 
     assert_le(time, 3600*24)
 
     let (caller_address) = get_caller_address()
     let (tst) = get_block_timestamp()
-    tempvar session_data: KeyConf = KeyConf(public_key = session_key, time=time, timestamp_start=tst, contract=0, total_value=0, acc_value=0)
+    tempvar session_data: KeyConf = KeyConf(public_key = session_key, time=time, timestamp_start=tst, contract=contract, selector=selector)
     _public_session_key.write(caller_address, session_data)
     
     setting_session_key.emit(public_key=session_key)
@@ -174,11 +175,24 @@ func check_call{
         with_attr error_message("Time is too late. Got time={tst), need t={data.timestamp_start + data.time}"):
             assert_le_felt(tst, data.timestamp_start + data.time)
         end
+        if data.contract != 0:
+            with_attr error_message("Wrong contract"):
+                assert call_data.to = data.contract
+            end
+        else:
+            return()
+        end
+        return()
     else:
+        if data.contract != 0:
+            with_attr error_message("Wrong contract"):
+                assert call_data.to = data.contract
+            end
+        else:
+            return()
+        end
         return()
     end
-
-    return ()
 end
 
 func validate_session_key_signature{

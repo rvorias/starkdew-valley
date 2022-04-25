@@ -2,7 +2,7 @@
     <div class="bg-white">
         <h1>Async helper</h1>
         <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
-        <p><button @click.stop="doSomething" class="bg-gray-500">Do Something</button></p>
+        <p><button @click.stop="doSomething" class="bg-gray-500 my-1">Claim Worker</button></p>
         <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() && false || '' }} {{ sessionKeyData }}</p>
     </div>
 </template>
@@ -79,13 +79,7 @@ export default defineComponent({
                 entrypoint: "get_session_key",
                 calldata: [toBN(ACCOUNT_CONTRACT).toString()],
             })
-            const addr = await account.callContract({
-                contractAddress: ACCOUNT_CONTRACT,
-                entrypoint: "get_session_key_contract",
-                calldata: [],
-            })
-            this.sessionKeyData = key_data.result.join(' ') + "\n" + addr.result;
-
+            this.sessionKeyData = key_data.result.join(' ');
         },
         async doSomething() {
             let account = getSessionSigner();
