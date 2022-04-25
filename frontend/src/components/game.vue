@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       flower_coords: [],
+      flower_idx: 0,
       regenerateModalStep: "nok" as "nok" | "waiting" | "regenerating" | "ok",
     }
   },
@@ -62,6 +63,8 @@ export default {
     raw_coords[0].map((a, index) => {
       this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: 3000, idx: index })
     })
+
+    this.flower_idx = raw_coords[0].length
 
     setTimeout(() => this.regenerateModalStep = 'waiting', 45 * 1000)
   },
@@ -114,7 +117,9 @@ export default {
         console.log(gruntState.x, gruntState.y)
         // Plant flowers
         // Use gruntState.x, gruntState.y
-        this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0})
+        this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0, index: this.flower_idx})
+
+        this.flower_idx++
       }
       else {
         this.flower_coords.forEach(async (flower, index) => {
@@ -125,7 +130,7 @@ export default {
               if (index !== -1) {
                 console.log(flower.stage);
                 weedStats.number_of_harvests += 1;
-                let build_farm = await starkvile.claim_resources(0, Math.round(flower.x), Math.round(flower.y))
+                let build_farm = await starkvile.claim_resources(this.flower_idx, Math.round(flower.x), Math.round(flower.y))
 
                 console.log(build_farm)
 

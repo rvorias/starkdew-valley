@@ -169,7 +169,7 @@
         ],
         "EXTERNAL": [
             {
-                "offset": "0x328",
+                "offset": "0x327",
                 "selector": "0x6ce3422293507e74e18ae2e426de09a60a26ab4e697a2b87ef65f0951208ce"
             },
             {
@@ -229,33 +229,6 @@
                 "accessible_scopes": [
                     "__main__",
                     "__main__",
-                    "__main__.build_farm"
-                ],
-                "end_pc": 781,
-                "flow_tracking_data": {
-                    "ap_tracking": {
-                        "group": 62,
-                        "offset": 73
-                    },
-                    "reference_ids": {
-                        "__main__.build_farm.caller": 444,
-                        "__main__.build_farm.pedersen_ptr": 448,
-                        "__main__.build_farm.planting_time": 446,
-                        "__main__.build_farm.range_check_ptr": 449,
-                        "__main__.build_farm.syscall_ptr": 447,
-                        "__main__.build_farm.workers": 450,
-                        "__main__.build_farm.x_coord": 438,
-                        "__main__.build_farm.y_coord": 439
-                    }
-                },
-                "name": "error_message",
-                "start_pc": 779,
-                "value": "Ser, claim a peasant first"
-            },
-            {
-                "accessible_scopes": [
-                    "__main__",
-                    "__main__",
                     "__main__.claim_resources"
                 ],
                 "end_pc": 846,
@@ -277,7 +250,7 @@
                     }
                 },
                 "name": "error_message",
-                "start_pc": 843,
+                "start_pc": 842,
                 "value": "Ser, you do not own this farm"
             }
         ],
@@ -1065,23 +1038,22 @@
             "0x48127ff67fff8000",
             "0x1104800180018000",
             "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffe75",
+            "0x48127ffc7fff8000",
+            "0x48127ffc7fff8000",
+            "0x48127ffc7fff8000",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffd0f",
-            "0x48127ffa7fff8000",
-            "0x48127ffa7fff8000",
-            "0x48127ffa7fff8000",
-            "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffed8",
-            "0x48127fa97fff8000",
-            "0x48127fa27fff8000",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffeda",
+            "0x48127fab7fff8000",
+            "0x480680017fff8000",
+            "0x2",
             "0x480a7ffc7fff8000",
             "0x480a7ffd7fff8000",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffeb1",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffeb2",
             "0x482480017fb28000",
             "0x1",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffedb",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffedc",
             "0x480680017fff8000",
             "0x1",
             "0x208b7fff7fff7ffe",
@@ -1103,7 +1075,7 @@
             "0x480280007ffd8000",
             "0x480280017ffd8000",
             "0x1104800180018000",
-            "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffce",
+            "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffcf",
             "0x48127ffe7fff8000",
             "0x1104800180018000",
             "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffed",
@@ -1117,19 +1089,20 @@
             "0x6",
             "0x480a7ff87fff8000",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffd90",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffd91",
             "0x40137fff7fff8000",
             "0x48127ffe7fff8000",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffd7e",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffd7f",
             "0x40137fff7fff8001",
             "0x48127ffe7fff8000",
             "0x480a7ff97fff8000",
             "0x480a7ffa7fff8000",
             "0x480a7ffb7fff8000",
             "0x1104800180018000",
-            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffe5e",
-            "0x400a80017fff7ffd",
+            "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffe5f",
+            "0x400680017fff7ffd",
+            "0x2",
             "0x400a7ffc7fff7ffe",
             "0x400a7ffd7fff7fff",
             "0x48127ff97fff8000",
@@ -1208,7 +1181,7 @@
             "0x480280017ffd8000",
             "0x480280027ffd8000",
             "0x1104800180018000",
-            "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffa3",
+            "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffa2",
             "0x48127ffe7fff8000",
             "0x1104800180018000",
             "0x800000000000010ffffffffffffffffffffffffffffffffffffffffffffffec",
@@ -26742,39 +26715,6 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 33,
-                        "end_line": 143,
-                        "input_file": {
-                            "filename": "contracts/starkvile/StarkVile.cairo"
-                        },
-                        "start_col": 9,
-                        "start_line": 143
-                    }
-                },
-                "781": {
-                    "accessible_scopes": [
-                        "__main__",
-                        "__main__",
-                        "__main__.build_farm"
-                    ],
-                    "flow_tracking_data": {
-                        "ap_tracking": {
-                            "group": 62,
-                            "offset": 75
-                        },
-                        "reference_ids": {
-                            "__main__.build_farm.caller": 444,
-                            "__main__.build_farm.pedersen_ptr": 448,
-                            "__main__.build_farm.planting_time": 446,
-                            "__main__.build_farm.range_check_ptr": 449,
-                            "__main__.build_farm.syscall_ptr": 447,
-                            "__main__.build_farm.workers": 450,
-                            "__main__.build_farm.x_coord": 438,
-                            "__main__.build_farm.y_coord": 439
-                        }
-                    },
-                    "hints": [],
-                    "inst": {
                         "end_col": 34,
                         "end_line": 13,
                         "input_file": {
@@ -26820,7 +26760,7 @@
                         "start_line": 13
                     }
                 },
-                "782": {
+                "780": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -26829,7 +26769,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 76
+                            "offset": 74
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -26889,7 +26829,7 @@
                         "start_line": 13
                     }
                 },
-                "783": {
+                "781": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -26898,7 +26838,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 77
+                            "offset": 75
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -26958,7 +26898,7 @@
                         "start_line": 13
                     }
                 },
-                "784": {
+                "782": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -26967,7 +26907,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 78
+                            "offset": 76
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -26991,7 +26931,7 @@
                         "start_line": 146
                     }
                 },
-                "786": {
+                "784": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27000,7 +26940,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 98
+                            "offset": 96
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -27037,7 +26977,87 @@
                         "start_line": 138
                     }
                 },
+                "785": {
+                    "accessible_scopes": [
+                        "__main__",
+                        "__main__",
+                        "__main__.build_farm"
+                    ],
+                    "flow_tracking_data": {
+                        "ap_tracking": {
+                            "group": 62,
+                            "offset": 97
+                        },
+                        "reference_ids": {
+                            "__main__.build_farm.caller": 444,
+                            "__main__.build_farm.farm_number": 454,
+                            "__main__.build_farm.pedersen_ptr": 452,
+                            "__main__.build_farm.planting_time": 446,
+                            "__main__.build_farm.range_check_ptr": 453,
+                            "__main__.build_farm.syscall_ptr": 451,
+                            "__main__.build_farm.workers": 450,
+                            "__main__.build_farm.x_coord": 438,
+                            "__main__.build_farm.y_coord": 439
+                        }
+                    },
+                    "hints": [],
+                    "inst": {
+                        "end_col": 51,
+                        "end_line": 148,
+                        "input_file": {
+                            "filename": "contracts/starkvile/StarkVile.cairo"
+                        },
+                        "start_col": 50,
+                        "start_line": 148
+                    }
+                },
                 "787": {
+                    "accessible_scopes": [
+                        "__main__",
+                        "__main__",
+                        "__main__.build_farm"
+                    ],
+                    "flow_tracking_data": {
+                        "ap_tracking": {
+                            "group": 62,
+                            "offset": 98
+                        },
+                        "reference_ids": {
+                            "__main__.build_farm.caller": 444,
+                            "__main__.build_farm.farm_number": 454,
+                            "__main__.build_farm.pedersen_ptr": 452,
+                            "__main__.build_farm.planting_time": 446,
+                            "__main__.build_farm.range_check_ptr": 453,
+                            "__main__.build_farm.syscall_ptr": 451,
+                            "__main__.build_farm.workers": 450,
+                            "__main__.build_farm.x_coord": 438,
+                            "__main__.build_farm.y_coord": 439
+                        }
+                    },
+                    "hints": [],
+                    "inst": {
+                        "end_col": 97,
+                        "end_line": 132,
+                        "input_file": {
+                            "filename": "contracts/starkvile/StarkVile.cairo"
+                        },
+                        "parent_location": [
+                            {
+                                "end_col": 60,
+                                "end_line": 148,
+                                "input_file": {
+                                    "filename": "contracts/starkvile/StarkVile.cairo"
+                                },
+                                "start_col": 53,
+                                "start_line": 148
+                            },
+                            "While expanding the reference 'x_coord' in:"
+                        ],
+                        "start_col": 84,
+                        "start_line": 132
+                    }
+                },
+                "788": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27062,28 +27082,28 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 16,
-                        "end_line": 136,
+                        "end_col": 112,
+                        "end_line": 132,
                         "input_file": {
                             "filename": "contracts/starkvile/StarkVile.cairo"
                         },
                         "parent_location": [
                             {
-                                "end_col": 56,
+                                "end_col": 69,
                                 "end_line": 148,
                                 "input_file": {
                                     "filename": "contracts/starkvile/StarkVile.cairo"
                                 },
-                                "start_col": 50,
+                                "start_col": 62,
                                 "start_line": 148
                             },
-                            "While expanding the reference 'caller' in:"
+                            "While expanding the reference 'y_coord' in:"
                         ],
-                        "start_col": 10,
-                        "start_line": 136
+                        "start_col": 99,
+                        "start_line": 132
                     }
                 },
-                "788": {
+                "789": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27108,99 +27128,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 97,
-                        "end_line": 132,
-                        "input_file": {
-                            "filename": "contracts/starkvile/StarkVile.cairo"
-                        },
-                        "parent_location": [
-                            {
-                                "end_col": 65,
-                                "end_line": 148,
-                                "input_file": {
-                                    "filename": "contracts/starkvile/StarkVile.cairo"
-                                },
-                                "start_col": 58,
-                                "start_line": 148
-                            },
-                            "While expanding the reference 'x_coord' in:"
-                        ],
-                        "start_col": 84,
-                        "start_line": 132
-                    }
-                },
-                "789": {
-                    "accessible_scopes": [
-                        "__main__",
-                        "__main__",
-                        "__main__.build_farm"
-                    ],
-                    "flow_tracking_data": {
-                        "ap_tracking": {
-                            "group": 62,
-                            "offset": 101
-                        },
-                        "reference_ids": {
-                            "__main__.build_farm.caller": 444,
-                            "__main__.build_farm.farm_number": 454,
-                            "__main__.build_farm.pedersen_ptr": 452,
-                            "__main__.build_farm.planting_time": 446,
-                            "__main__.build_farm.range_check_ptr": 453,
-                            "__main__.build_farm.syscall_ptr": 451,
-                            "__main__.build_farm.workers": 450,
-                            "__main__.build_farm.x_coord": 438,
-                            "__main__.build_farm.y_coord": 439
-                        }
-                    },
-                    "hints": [],
-                    "inst": {
-                        "end_col": 112,
-                        "end_line": 132,
-                        "input_file": {
-                            "filename": "contracts/starkvile/StarkVile.cairo"
-                        },
-                        "parent_location": [
-                            {
-                                "end_col": 74,
-                                "end_line": 148,
-                                "input_file": {
-                                    "filename": "contracts/starkvile/StarkVile.cairo"
-                                },
-                                "start_col": 67,
-                                "start_line": 148
-                            },
-                            "While expanding the reference 'y_coord' in:"
-                        ],
-                        "start_col": 99,
-                        "start_line": 132
-                    }
-                },
-                "790": {
-                    "accessible_scopes": [
-                        "__main__",
-                        "__main__",
-                        "__main__.build_farm"
-                    ],
-                    "flow_tracking_data": {
-                        "ap_tracking": {
-                            "group": 62,
-                            "offset": 102
-                        },
-                        "reference_ids": {
-                            "__main__.build_farm.caller": 444,
-                            "__main__.build_farm.farm_number": 454,
-                            "__main__.build_farm.pedersen_ptr": 452,
-                            "__main__.build_farm.planting_time": 446,
-                            "__main__.build_farm.range_check_ptr": 453,
-                            "__main__.build_farm.syscall_ptr": 451,
-                            "__main__.build_farm.workers": 450,
-                            "__main__.build_farm.x_coord": 438,
-                            "__main__.build_farm.y_coord": 439
-                        }
-                    },
-                    "hints": [],
-                    "inst": {
-                        "end_col": 76,
+                        "end_col": 71,
                         "end_line": 148,
                         "input_file": {
                             "filename": "contracts/starkvile/StarkVile.cairo"
@@ -27209,7 +27137,7 @@
                         "start_line": 148
                     }
                 },
-                "792": {
+                "791": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27218,7 +27146,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 175
+                            "offset": 173
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -27243,7 +27171,7 @@
                         "start_line": 150
                     }
                 },
-                "794": {
+                "793": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27252,7 +27180,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 176
+                            "offset": 174
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -27277,7 +27205,7 @@
                         "start_line": 150
                     }
                 },
-                "796": {
+                "795": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27286,7 +27214,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 194
+                            "offset": 192
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -27311,7 +27239,7 @@
                         "start_line": 152
                     }
                 },
-                "798": {
+                "797": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27320,7 +27248,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 62,
-                            "offset": 195
+                            "offset": 193
                         },
                         "reference_ids": {
                             "__main__.build_farm.caller": 444,
@@ -27345,7 +27273,7 @@
                         "start_line": 152
                     }
                 },
-                "799": {
+                "798": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27410,7 +27338,7 @@
                         "start_line": 4
                     }
                 },
-                "801": {
+                "800": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27452,7 +27380,7 @@
                         "start_line": 1
                     }
                 },
-                "802": {
+                "801": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27518,7 +27446,7 @@
                         "start_line": 2
                     }
                 },
-                "804": {
+                "803": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27585,7 +27513,7 @@
                         "start_line": 1
                     }
                 },
-                "805": {
+                "804": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27628,7 +27556,7 @@
                         "start_line": 11
                     }
                 },
-                "806": {
+                "805": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27695,7 +27623,7 @@
                         "start_line": 5
                     }
                 },
-                "807": {
+                "806": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27738,7 +27666,7 @@
                         "start_line": 9
                     }
                 },
-                "808": {
+                "807": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27831,7 +27759,7 @@
                         "start_line": 2
                     }
                 },
-                "810": {
+                "809": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27877,7 +27805,7 @@
                         "start_line": 1
                     }
                 },
-                "811": {
+                "810": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -27947,7 +27875,7 @@
                         "start_line": 1
                     }
                 },
-                "812": {
+                "811": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28017,7 +27945,7 @@
                         "start_line": 1
                     }
                 },
-                "813": {
+                "812": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28087,7 +28015,7 @@
                         "start_line": 1
                     }
                 },
-                "814": {
+                "813": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28157,7 +28085,7 @@
                         "start_line": 1
                     }
                 },
-                "815": {
+                "814": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28227,7 +28155,7 @@
                         "start_line": 1
                     }
                 },
-                "816": {
+                "815": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28261,7 +28189,7 @@
                         "start_line": 132
                     }
                 },
-                "818": {
+                "817": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28271,7 +28199,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 203
+                            "offset": 201
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28332,7 +28260,7 @@
                         "start_line": 1
                     }
                 },
-                "819": {
+                "818": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28342,7 +28270,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 204
+                            "offset": 202
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28379,7 +28307,7 @@
                         "start_line": 2
                     }
                 },
-                "821": {
+                "820": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28389,7 +28317,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 211
+                            "offset": 209
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28452,7 +28380,7 @@
                         "start_line": 1
                     }
                 },
-                "822": {
+                "821": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28462,7 +28390,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 212
+                            "offset": 210
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28525,7 +28453,7 @@
                         "start_line": 1
                     }
                 },
-                "823": {
+                "822": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28535,7 +28463,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 213
+                            "offset": 211
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28598,7 +28526,7 @@
                         "start_line": 2
                     }
                 },
-                "824": {
+                "823": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28608,7 +28536,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 214
+                            "offset": 212
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28671,7 +28599,7 @@
                         "start_line": 2
                     }
                 },
-                "825": {
+                "824": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28681,7 +28609,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 215
+                            "offset": 213
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28744,7 +28672,7 @@
                         "start_line": 2
                     }
                 },
-                "826": {
+                "825": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28754,7 +28682,7 @@
                     "flow_tracking_data": {
                         "ap_tracking": {
                             "group": 64,
-                            "offset": 216
+                            "offset": 214
                         },
                         "reference_ids": {
                             "__wrappers__.build_farm.__calldata_actual_size": 475,
@@ -28793,7 +28721,7 @@
                         "start_line": 1
                     }
                 },
-                "827": {
+                "826": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28824,7 +28752,7 @@
                         "start_line": 158
                     }
                 },
-                "829": {
+                "828": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28879,7 +28807,7 @@
                         "start_line": 156
                     }
                 },
-                "830": {
+                "829": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28910,7 +28838,7 @@
                         "start_line": 160
                     }
                 },
-                "832": {
+                "831": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -28954,7 +28882,7 @@
                         "start_line": 160
                     }
                 },
-                "833": {
+                "832": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29022,7 +28950,7 @@
                         "start_line": 210
                     }
                 },
-                "834": {
+                "833": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29054,7 +28982,7 @@
                         "start_line": 162
                     }
                 },
-                "836": {
+                "835": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29099,7 +29027,7 @@
                         "start_line": 162
                     }
                 },
-                "837": {
+                "836": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29168,7 +29096,7 @@
                         "start_line": 112
                     }
                 },
-                "838": {
+                "837": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29225,7 +29153,7 @@
                         "start_line": 156
                     }
                 },
-                "839": {
+                "838": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29282,7 +29210,7 @@
                         "start_line": 156
                     }
                 },
-                "840": {
+                "839": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29327,7 +29255,7 @@
                         "start_line": 157
                     }
                 },
-                "841": {
+                "840": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29360,7 +29288,7 @@
                         "start_line": 164
                     }
                 },
-                "843": {
+                "842": {
                     "accessible_scopes": [
                         "__main__",
                         "__main__",
@@ -29385,7 +29313,7 @@
                     },
                     "hints": [],
                     "inst": {
-                        "end_col": 35,
+                        "end_col": 30,
                         "end_line": 168,
                         "input_file": {
                             "filename": "contracts/starkvile/StarkVile.cairo"
@@ -36314,7 +36242,7 @@
                     }
                 }
             ],
-            "799": [
+            "798": [
                 {
                     "accessible_scopes": [
                         "__main__",
@@ -36712,9 +36640,9 @@
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 98
+                            "offset": 96
                         },
-                        "pc": 786,
+                        "pc": 784,
                         "value": "[cast(ap + (-1), felt*)]"
                     }
                 ],
@@ -36743,25 +36671,25 @@
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 98
+                            "offset": 96
                         },
-                        "pc": 786,
+                        "pc": 784,
                         "value": "[cast(ap + (-3), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 175
+                            "offset": 173
                         },
-                        "pc": 792,
+                        "pc": 791,
                         "value": "[cast(ap + (-2), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 194
+                            "offset": 192
                         },
-                        "pc": 796,
+                        "pc": 795,
                         "value": "[cast(ap + (-2), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     }
                 ],
@@ -36805,25 +36733,25 @@
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 98
+                            "offset": 96
                         },
-                        "pc": 786,
+                        "pc": 784,
                         "value": "[cast(ap + (-2), felt*)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 175
+                            "offset": 173
                         },
-                        "pc": 792,
+                        "pc": 791,
                         "value": "[cast(ap + (-1), felt*)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 194
+                            "offset": 192
                         },
-                        "pc": 796,
+                        "pc": 795,
                         "value": "[cast(ap + (-1), felt*)]"
                     }
                 ],
@@ -36868,25 +36796,25 @@
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 98
+                            "offset": 96
                         },
-                        "pc": 786,
+                        "pc": 784,
                         "value": "[cast(ap + (-4), felt**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 175
+                            "offset": 173
                         },
-                        "pc": 792,
+                        "pc": 791,
                         "value": "[cast(ap + (-3), felt**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 62,
-                            "offset": 194
+                            "offset": 192
                         },
-                        "pc": 796,
+                        "pc": 795,
                         "value": "[cast(ap + (-3), felt**)]"
                     }
                 ],
@@ -36941,7 +36869,7 @@
                 "decorators": [
                     "external"
                 ],
-                "pc": 827,
+                "pc": 826,
                 "type": "function"
             },
             "__main__.claim_resources.Args": {
@@ -37036,7 +36964,7 @@
                             "group": 65,
                             "offset": 12
                         },
-                        "pc": 832,
+                        "pc": 831,
                         "value": "[cast(ap + (-1), felt*)]"
                     },
                     {
@@ -37044,7 +36972,7 @@
                             "group": 65,
                             "offset": 12
                         },
-                        "pc": 833,
+                        "pc": 832,
                         "value": "[cast(fp, felt*)]"
                     }
                 ],
@@ -37059,7 +36987,7 @@
                             "group": 65,
                             "offset": 18
                         },
-                        "pc": 836,
+                        "pc": 835,
                         "value": "[cast(ap + (-1), felt*)]"
                     },
                     {
@@ -37067,7 +36995,7 @@
                             "group": 65,
                             "offset": 18
                         },
-                        "pc": 837,
+                        "pc": 836,
                         "value": "[cast(fp + 1, felt*)]"
                     }
                 ],
@@ -37120,7 +37048,7 @@
                             "group": 65,
                             "offset": 103
                         },
-                        "pc": 843,
+                        "pc": 842,
                         "value": "[cast(ap + (-4), __main__.Farm*)]"
                     }
                 ],
@@ -37135,7 +37063,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-5), felt*)]"
                     }
                 ],
@@ -37165,7 +37093,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
@@ -37173,7 +37101,7 @@
                             "group": 65,
                             "offset": 97
                         },
-                        "pc": 841,
+                        "pc": 840,
                         "value": "[cast(ap + (-6), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
@@ -37221,7 +37149,7 @@
                             "group": 65,
                             "offset": 103
                         },
-                        "pc": 843,
+                        "pc": 842,
                         "value": "[cast(ap + (-6), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
@@ -37284,7 +37212,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-6), felt*)]"
                     },
                     {
@@ -37292,7 +37220,7 @@
                             "group": 65,
                             "offset": 97
                         },
-                        "pc": 841,
+                        "pc": 840,
                         "value": "[cast(ap + (-5), felt*)]"
                     },
                     {
@@ -37348,7 +37276,7 @@
                             "group": 65,
                             "offset": 103
                         },
-                        "pc": 843,
+                        "pc": 842,
                         "value": "[cast(ap + (-5), felt*)]"
                     },
                     {
@@ -37434,7 +37362,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-8), felt**)]"
                     },
                     {
@@ -37442,7 +37370,7 @@
                             "group": 65,
                             "offset": 6
                         },
-                        "pc": 832,
+                        "pc": 831,
                         "value": "[cast(ap + (-2), felt**)]"
                     },
                     {
@@ -37450,7 +37378,7 @@
                             "group": 65,
                             "offset": 12
                         },
-                        "pc": 835,
+                        "pc": 834,
                         "value": "[cast(ap + (-2), felt**)]"
                     },
                     {
@@ -37458,7 +37386,7 @@
                             "group": 65,
                             "offset": 97
                         },
-                        "pc": 841,
+                        "pc": 840,
                         "value": "[cast(ap + (-7), felt**)]"
                     },
                     {
@@ -37506,7 +37434,7 @@
                             "group": 65,
                             "offset": 12
                         },
-                        "pc": 832,
+                        "pc": 831,
                         "value": "[cast(ap + (-2), felt**)]"
                     },
                     {
@@ -37514,7 +37442,7 @@
                             "group": 65,
                             "offset": 18
                         },
-                        "pc": 836,
+                        "pc": 835,
                         "value": "[cast(ap + (-2), felt**)]"
                     },
                     {
@@ -37522,7 +37450,7 @@
                             "group": 65,
                             "offset": 103
                         },
-                        "pc": 843,
+                        "pc": 842,
                         "value": "[cast(ap + (-7), felt**)]"
                     },
                     {
@@ -37585,7 +37513,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-4), felt*)]"
                     }
                 ],
@@ -37600,7 +37528,7 @@
                             "group": 65,
                             "offset": 0
                         },
-                        "pc": 827,
+                        "pc": 826,
                         "value": "[cast(fp + (-3), felt*)]"
                     }
                 ],
@@ -40835,7 +40763,7 @@
                 "decorators": [
                     "external"
                 ],
-                "pc": 808,
+                "pc": 807,
                 "type": "function"
             },
             "__wrappers__.build_farm.Args": {
@@ -40890,7 +40818,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "cast([fp + (-3)] + 2 - [fp + (-3)], felt)"
                     }
                 ],
@@ -40905,7 +40833,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast([fp + (-3)], felt*)]"
                     }
                 ],
@@ -40920,7 +40848,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast([fp + (-3)] + 1, felt*)]"
                     }
                 ],
@@ -40935,7 +40863,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast(fp + (-3), felt**)]"
                     },
                     {
@@ -40943,7 +40871,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "cast([fp + (-3)] + 1, felt*)"
                     },
                     {
@@ -40951,7 +40879,7 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "cast([fp + (-3)] + 2, felt*)"
                     }
                 ],
@@ -40966,7 +40894,7 @@
                             "group": 64,
                             "offset": 1
                         },
-                        "pc": 810,
+                        "pc": 809,
                         "value": "[cast(ap + (-1), felt*)]"
                     }
                 ],
@@ -40985,15 +40913,15 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 203
+                            "offset": 201
                         },
-                        "pc": 818,
+                        "pc": 817,
                         "value": "[cast(ap + (-3), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                     }
                 ],
@@ -41008,23 +40936,23 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast([fp + (-5)] + 2, felt*)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 203
+                            "offset": 201
                         },
-                        "pc": 818,
+                        "pc": 817,
                         "value": "[cast(ap + (-2), felt*)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 211
+                            "offset": 209
                         },
-                        "pc": 821,
+                        "pc": 820,
                         "value": "[cast(ap + (-3), felt*)]"
                     }
                 ],
@@ -41037,9 +40965,9 @@
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 203
+                            "offset": 201
                         },
-                        "pc": 818,
+                        "pc": 817,
                         "value": "[cast(ap + (-1), __main__.build_farm.Return*)]"
                     }
                 ],
@@ -41052,9 +40980,9 @@
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 211
+                            "offset": 209
                         },
-                        "pc": 821,
+                        "pc": 820,
                         "value": "[cast(ap + (-1), felt**)]"
                     }
                 ],
@@ -41067,9 +40995,9 @@
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 211
+                            "offset": 209
                         },
-                        "pc": 821,
+                        "pc": 820,
                         "value": "[cast(ap + (-2), felt*)]"
                     }
                 ],
@@ -41084,15 +41012,15 @@
                             "group": 64,
                             "offset": 0
                         },
-                        "pc": 808,
+                        "pc": 807,
                         "value": "[cast([fp + (-5)], felt**)]"
                     },
                     {
                         "ap_tracking_data": {
                             "group": 64,
-                            "offset": 203
+                            "offset": 201
                         },
-                        "pc": 818,
+                        "pc": 817,
                         "value": "[cast(ap + (-4), felt**)]"
                     }
                 ],
@@ -41100,7 +41028,7 @@
             },
             "__wrappers__.build_farm_encode_return": {
                 "decorators": [],
-                "pc": 799,
+                "pc": 798,
                 "type": "function"
             },
             "__wrappers__.build_farm_encode_return.Args": {
@@ -41156,7 +41084,7 @@
                             "group": 63,
                             "offset": 1
                         },
-                        "pc": 801,
+                        "pc": 800,
                         "value": "[cast(fp, felt**)]"
                     },
                     {
@@ -41164,7 +41092,7 @@
                             "group": 63,
                             "offset": 1
                         },
-                        "pc": 802,
+                        "pc": 801,
                         "value": "cast([fp] + 1, felt*)"
                     }
                 ],
@@ -41179,7 +41107,7 @@
                             "group": 63,
                             "offset": 1
                         },
-                        "pc": 801,
+                        "pc": 800,
                         "value": "[cast(fp, felt**)]"
                     }
                 ],
@@ -41194,7 +41122,7 @@
                             "group": 63,
                             "offset": 2
                         },
-                        "pc": 804,
+                        "pc": 803,
                         "value": "[cast(ap + (-1), felt*)]"
                     }
                 ],
@@ -41213,7 +41141,7 @@
                             "group": 63,
                             "offset": 0
                         },
-                        "pc": 799,
+                        "pc": 798,
                         "value": "[cast(fp + (-3), felt*)]"
                     }
                 ],
@@ -41228,7 +41156,7 @@
                             "group": 63,
                             "offset": 0
                         },
-                        "pc": 799,
+                        "pc": 798,
                         "value": "[cast(fp + (-4), __main__.build_farm.Return*)]"
                     }
                 ],
@@ -51451,81 +51379,81 @@
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 98
+                        "offset": 96
                     },
-                    "pc": 786,
+                    "pc": 784,
                     "value": "[cast(ap + (-4), felt**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 98
+                        "offset": 96
                     },
-                    "pc": 786,
+                    "pc": 784,
                     "value": "[cast(ap + (-3), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 98
+                        "offset": 96
                     },
-                    "pc": 786,
+                    "pc": 784,
                     "value": "[cast(ap + (-2), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 98
+                        "offset": 96
                     },
-                    "pc": 786,
+                    "pc": 784,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 175
+                        "offset": 173
                     },
-                    "pc": 792,
+                    "pc": 791,
                     "value": "[cast(ap + (-3), felt**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 175
+                        "offset": 173
                     },
-                    "pc": 792,
+                    "pc": 791,
                     "value": "[cast(ap + (-2), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 175
+                        "offset": 173
                     },
-                    "pc": 792,
+                    "pc": 791,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 194
+                        "offset": 192
                     },
-                    "pc": 796,
+                    "pc": 795,
                     "value": "[cast(ap + (-3), felt**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 194
+                        "offset": 192
                     },
-                    "pc": 796,
+                    "pc": 795,
                     "value": "[cast(ap + (-2), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 62,
-                        "offset": 194
+                        "offset": 192
                     },
-                    "pc": 796,
+                    "pc": 795,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
@@ -51533,7 +51461,7 @@
                         "group": 63,
                         "offset": 0
                     },
-                    "pc": 799,
+                    "pc": 798,
                     "value": "[cast(fp + (-4), __main__.build_farm.Return*)]"
                 },
                 {
@@ -51541,7 +51469,7 @@
                         "group": 63,
                         "offset": 0
                     },
-                    "pc": 799,
+                    "pc": 798,
                     "value": "[cast(fp + (-3), felt*)]"
                 },
                 {
@@ -51549,7 +51477,15 @@
                         "group": 63,
                         "offset": 1
                     },
-                    "pc": 801,
+                    "pc": 800,
+                    "value": "[cast(fp, felt**)]"
+                },
+                {
+                    "ap_tracking_data": {
+                        "group": 63,
+                        "offset": 1
+                    },
+                    "pc": 800,
                     "value": "[cast(fp, felt**)]"
                 },
                 {
@@ -51558,14 +51494,6 @@
                         "offset": 1
                     },
                     "pc": 801,
-                    "value": "[cast(fp, felt**)]"
-                },
-                {
-                    "ap_tracking_data": {
-                        "group": 63,
-                        "offset": 1
-                    },
-                    "pc": 802,
                     "value": "cast([fp] + 1, felt*)"
                 },
                 {
@@ -51573,7 +51501,7 @@
                         "group": 63,
                         "offset": 2
                     },
-                    "pc": 804,
+                    "pc": 803,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
@@ -51581,7 +51509,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast([fp + (-5)], felt**)]"
                 },
                 {
@@ -51589,7 +51517,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast([fp + (-5)] + 1, starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
@@ -51597,7 +51525,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast([fp + (-5)] + 2, felt*)]"
                 },
                 {
@@ -51605,7 +51533,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast(fp + (-3), felt**)]"
                 },
                 {
@@ -51613,7 +51541,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast([fp + (-3)], felt*)]"
                 },
                 {
@@ -51621,7 +51549,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "cast([fp + (-3)] + 1, felt*)"
                 },
                 {
@@ -51629,7 +51557,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "[cast([fp + (-3)] + 1, felt*)]"
                 },
                 {
@@ -51637,7 +51565,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "cast([fp + (-3)] + 2, felt*)"
                 },
                 {
@@ -51645,7 +51573,7 @@
                         "group": 64,
                         "offset": 0
                     },
-                    "pc": 808,
+                    "pc": 807,
                     "value": "cast([fp + (-3)] + 2 - [fp + (-3)], felt)"
                 },
                 {
@@ -51653,63 +51581,63 @@
                         "group": 64,
                         "offset": 1
                     },
-                    "pc": 810,
+                    "pc": 809,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 203
+                        "offset": 201
                     },
-                    "pc": 818,
+                    "pc": 817,
                     "value": "[cast(ap + (-4), felt**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 203
+                        "offset": 201
                     },
-                    "pc": 818,
+                    "pc": 817,
                     "value": "[cast(ap + (-3), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 203
+                        "offset": 201
                     },
-                    "pc": 818,
+                    "pc": 817,
                     "value": "[cast(ap + (-2), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 203
+                        "offset": 201
                     },
-                    "pc": 818,
+                    "pc": 817,
                     "value": "[cast(ap + (-1), __main__.build_farm.Return*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 211
+                        "offset": 209
                     },
-                    "pc": 821,
+                    "pc": 820,
                     "value": "[cast(ap + (-3), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 211
+                        "offset": 209
                     },
-                    "pc": 821,
+                    "pc": 820,
                     "value": "[cast(ap + (-2), felt*)]"
                 },
                 {
                     "ap_tracking_data": {
                         "group": 64,
-                        "offset": 211
+                        "offset": 209
                     },
-                    "pc": 821,
+                    "pc": 820,
                     "value": "[cast(ap + (-1), felt**)]"
                 },
                 {
@@ -51717,7 +51645,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-5), felt*)]"
                 },
                 {
@@ -51725,7 +51653,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-4), felt*)]"
                 },
                 {
@@ -51733,7 +51661,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-3), felt*)]"
                 },
                 {
@@ -51741,7 +51669,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-8), felt**)]"
                 },
                 {
@@ -51749,7 +51677,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
@@ -51757,7 +51685,7 @@
                         "group": 65,
                         "offset": 0
                     },
-                    "pc": 827,
+                    "pc": 826,
                     "value": "[cast(fp + (-6), felt*)]"
                 },
                 {
@@ -51765,7 +51693,7 @@
                         "group": 65,
                         "offset": 12
                     },
-                    "pc": 832,
+                    "pc": 831,
                     "value": "[cast(ap + (-2), felt**)]"
                 },
                 {
@@ -51773,7 +51701,7 @@
                         "group": 65,
                         "offset": 12
                     },
-                    "pc": 832,
+                    "pc": 831,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
@@ -51781,7 +51709,7 @@
                         "group": 65,
                         "offset": 12
                     },
-                    "pc": 833,
+                    "pc": 832,
                     "value": "[cast(fp, felt*)]"
                 },
                 {
@@ -51789,7 +51717,7 @@
                         "group": 65,
                         "offset": 18
                     },
-                    "pc": 836,
+                    "pc": 835,
                     "value": "[cast(ap + (-2), felt**)]"
                 },
                 {
@@ -51797,7 +51725,7 @@
                         "group": 65,
                         "offset": 18
                     },
-                    "pc": 836,
+                    "pc": 835,
                     "value": "[cast(ap + (-1), felt*)]"
                 },
                 {
@@ -51805,7 +51733,7 @@
                         "group": 65,
                         "offset": 18
                     },
-                    "pc": 837,
+                    "pc": 836,
                     "value": "[cast(fp + 1, felt*)]"
                 },
                 {
@@ -51813,7 +51741,7 @@
                         "group": 65,
                         "offset": 103
                     },
-                    "pc": 843,
+                    "pc": 842,
                     "value": "[cast(ap + (-7), felt**)]"
                 },
                 {
@@ -51821,7 +51749,7 @@
                         "group": 65,
                         "offset": 103
                     },
-                    "pc": 843,
+                    "pc": 842,
                     "value": "[cast(ap + (-6), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 },
                 {
@@ -51829,7 +51757,7 @@
                         "group": 65,
                         "offset": 103
                     },
-                    "pc": 843,
+                    "pc": 842,
                     "value": "[cast(ap + (-5), felt*)]"
                 },
                 {
@@ -51837,7 +51765,7 @@
                         "group": 65,
                         "offset": 103
                     },
-                    "pc": 843,
+                    "pc": 842,
                     "value": "[cast(ap + (-4), __main__.Farm*)]"
                 },
                 {

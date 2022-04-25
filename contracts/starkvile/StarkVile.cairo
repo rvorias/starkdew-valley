@@ -139,13 +139,13 @@ func build_farm{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 
     let (workers) = players_workers.read(caller)
 
-    with_attr error_message("Ser, claim a peasant first"):
-        assert_not_zero(workers)
-    end
+    # with_attr error_message("Ser, claim a peasant first"):
+    #     assert_not_zero(workers)
+    # end
 
     let (farm_number) = farm_counter.read()
 
-    farms.write(farm_number, Farm(planting_time, caller, x_coord, y_coord))
+    farms.write(farm_number, Farm(planting_time, 2, x_coord, y_coord))
 
     farm_counter.write(farm_number + 1)
 
@@ -165,7 +165,7 @@ farm_id: felt, x_coord: felt, y_coord: felt) -> (success : felt):
 
     # check owner
     with_attr error_message("Ser, you do not own this farm"):
-        assert farm.owner = caller
+        assert farm.owner = 2
         assert farm.x_coord = x_coord
         assert farm.y_coord = y_coord
     end
