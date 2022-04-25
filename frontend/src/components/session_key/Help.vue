@@ -2,7 +2,7 @@
     <div class="bg-white">
         <h1>Async helper</h1>
         <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
-        <p><button @click.stop="doSomething" class="bg-gray-500">Do Something</button></p>
+        <p><button @click.stop="doSomething" class="bg-gray-500 my-1">Claim Worker</button></p>
         <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() && false || '' }} {{ sessionKeyData }}</p>
     </div>
 </template>
