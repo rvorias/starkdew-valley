@@ -1,24 +1,26 @@
 <template>
-    <div class="bg-white">
+    <div class="bg-white relative top-[1000px]">
         <h1>ToTo</h1>
-        <button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button>
-        <button @click.stop="doSomething" class="bg-gray-500">Do Something</button>
-
+        <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
+        <p><button @click.stop="doSomething" class="bg-gray-500">Do Something</button></p>
+        <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() }} {{ sessionKeyData }}</p>
     </div>
 </template>
 
 <script lang="ts">
 
-const ACCOUNT_CONTRACT = "0x04b5f4857ebb588bfc964edb773791018cb7678bf55ca6e5fdcfadaf0e26114c"
+const ACCOUNT_CONTRACT = "0x07ea456d5af6c8b5f7499c79e48260dd37148be27f37ed4f314e5166d5c7480e"
 const ACCOUNT_PRIVATE_KEY = 123456
+const SESSION_CONTRACT = "0x007fc4ee71dcd9e993e673315b7f5afd84bde6a945e8023769b802191e4783d5"
 const SESSION_PRIVATE_KEY = 0xcafefade
 
-import {starkvile} from '@/composables/contract'
-
 import { makeSigner } from './Help';
-import { Provider, Account, getStarknet } from '@/starknet_wrapper'
+import { Provider, Account, getStarknet, toBN } from '@/starknet_wrapper'
 
 import { getKeyPair } from 'starknet/utils/ellipticCurve';
+
+import { starkvile } from '@/composables/contract'
+
 
 export function getSessionSigner() {
     let prov = new Provider({
@@ -32,7 +34,9 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     data() {
         return {
-            balance: 0
+            balance: 0,
+            session_contract: SESSION_CONTRACT,
+            sessionKeyData: "",
         }
     },
     async mounted() {
@@ -46,6 +50,28 @@ export default defineComponent({
             let signer = new Account(prov, ACCOUNT_CONTRACT, getKeyPair(ACCOUNT_PRIVATE_KEY));
             return signer;
         },
+        async setSessionContract() {
+            let account = this.getSigner();
+            let nonce = parseInt((await account.callContract({
+                contractAddress: ACCOUNT_CONTRACT,
+                entrypoint: "get_nonce",
+                calldata: [],
+            })).result[0], 16);
+            console.log("Calling set_session_key_contract")
+            let tx = await account.execute(
+                [{
+                    contractAddress: ACCOUNT_CONTRACT,
+                    entrypoint: "set_session_key_contract",
+                    calldata: [SESSION_CONTRACT],
+                }],
+                undefined,
+                {
+                    nonce: nonce,
+                    maxFee: 0,
+                }
+            );
+            console.log(tx);
+        },
         async setSessionKey() {
             let account = this.getSigner();
             let nonce = parseInt((await account.callContract({
@@ -55,9 +81,9 @@ export default defineComponent({
             })).result[0], 16);
             let tx = await account.execute(
                 [{
-                    contractAddress: "0x04f0875d1a67952a0ecedf9fa62c60ce6f3d29b70e6ad28199b0310bffe1ef0b",
+                    contractAddress: ACCOUNT_CONTRACT,
                     entrypoint: "set_session_key",
-                    calldata: [SESSION_PRIVATE_KEY],
+                    calldata: [SESSION_PRIVATE_KEY, 0],
                 }],
                 undefined,
                 {
@@ -66,6 +92,14 @@ export default defineComponent({
                 }
             );
             console.log(tx);
+        },
+        getSessionKey() {
+            let account = this.getSigner();
+            account.callContract({
+                contractAddress: SESSION_CONTRACT,
+                entrypoint: "get_session_key",
+                calldata: [toBN(ACCOUNT_CONTRACT).toString()],
+            }).then(x => { console.log(x.result); this.sessionKeyData = x.result.join(' ') });
         },
         async doSomething() {
             let account = this.getSigner();

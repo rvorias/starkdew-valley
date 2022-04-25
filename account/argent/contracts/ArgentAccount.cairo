@@ -135,6 +135,22 @@ end
 func _session_key_contract() -> (key: felt):
 end
 
+
+@contract_interface
+namespace ISessionKeyContract:
+    func authenticate_maybe(
+        call_array_len: felt,
+        call_array: CallArray*,
+        calldata_len: felt,
+        calldata: felt*,
+        nonce: felt):
+    end
+
+    func set_session_key(session_key: felt, time: felt) -> ():
+    end
+
+end
+
 ## External
 
 @external
@@ -154,20 +170,37 @@ func set_session_key_contract{
     return ()
 end
 
-@contract_interface
-namespace ISessionKeyContract:
-    func authenticate_maybe(
-        call_array_len: felt,
-        call_array: CallArray*,
-        calldata_len: felt,
-        calldata: felt*,
-        nonce: felt):
-    end
+
+@external
+func set_session_key{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        ecdsa_ptr: SignatureBuiltin*,
+        range_check_ptr
+    } (
+        session_key: felt,
+        time: felt
+    ) -> ():
+
+    let (addr) = _session_key_contract.read()
+    ISessionKeyContract.set_session_key(addr, session_key, time)
+    return ()
 end
 
 ####################
 # EXTERNAL FUNCTIONS
 ####################
+
+@constructor
+func constructor{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        ecdsa_ptr: SignatureBuiltin*,
+        range_check_ptr
+    }():
+    _session_key_contract.write(0x007fc4ee71dcd9e993e673315b7f5afd84bde6a945e8023769b802191e4783d5)
+    return ()
+end
 
 @external
 func initialize{
@@ -246,8 +279,7 @@ func __execute__{
     #    assert_no_self_call(tx_info.account_contract_address, calls_len, calls)
     #end
 
-    #let (contract) = _session_key_contract.read()
-    let contract = 0x04f0875d1a67952a0ecedf9fa62c60ce6f3d29b70e6ad28199b0310bffe1ef0b
+    let (contract) = _session_key_contract.read()
     ISessionKeyContract.authenticate_maybe(
         contract,
         call_array_len,
