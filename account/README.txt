@@ -1,0 +1,1 @@
+starknet deploy --contract artifacts/ArgentAccount.json

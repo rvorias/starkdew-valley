@@ -15,6 +15,8 @@ from starkware.cairo.common.hash_state import (
 
 from contracts.Upgradable import _set_implementation
 
+from contracts.CallLogic import (Call, CallArray, from_call_array_to_call)
+
 @contract_interface
 namespace IAccount:
     func supportsInterface(interfaceId: felt) -> (success : felt):
@@ -48,22 +50,6 @@ const FALSE = 0
 ####################
 # STRUCTS
 ####################
-
-struct Call:
-    member to: felt
-    member selector: felt
-    member calldata_len: felt
-    member calldata: felt*
-end
-
-# Tmp struct introduced while we wait for Cairo
-# to support passing `[Call]` to __execute__
-struct CallArray:
-    member to: felt
-    member selector: felt
-    member data_offset: felt
-    member data_len: felt
-end
 
 struct Escape:
     member active_at: felt
@@ -138,6 +124,47 @@ end
 func _escape() -> (res: Escape):
 end
 
+
+####################
+# hackathon stuff
+####################
+
+## Storage var
+
+@storage_var
+func _session_key_contract() -> (key: felt):
+end
+
+## External
+
+@external
+func set_session_key_contract{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        ecdsa_ptr: SignatureBuiltin*,
+        range_check_ptr
+    } (
+        address: felt
+    ) -> ():
+    let (origin) = _signer.read()
+    let (caller_address) = get_caller_address()
+    assert caller_address = origin
+
+    _session_key_contract.write(address)
+    return ()
+end
+
+@contract_interface
+namespace ISessionKeyContract:
+    func authenticate_maybe(
+        call_array_len: felt,
+        call_array: CallArray*,
+        calldata_len: felt,
+        calldata: felt*,
+        nonce: felt):
+    end
+end
+
 ####################
 # EXTERNAL FUNCTIONS
 ####################
@@ -198,37 +225,53 @@ func __execute__{
     # get the tx info
     let (tx_info) = get_tx_info()
 
-    if calls_len == 1:
-        if calls[0].to == tx_info.account_contract_address:
-            tempvar signer_condition = (calls[0].selector - ESCAPE_GUARDIAN_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_GUARDIAN_SELECTOR)
-            tempvar guardian_condition = (calls[0].selector - ESCAPE_SIGNER_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_SIGNER_SELECTOR)
-            if signer_condition == 0:
-                # validate signer signature
-                validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
-                jmp do_execute
-            end
-            if guardian_condition == 0:
-                # validate guardian signature
-                validate_guardian_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
-                jmp do_execute
-            end
-        end
-    else:
-        # make sure no call is to the account
-        assert_no_self_call(tx_info.account_contract_address, calls_len, calls)
-    end
+    # Commented out - revoked reference pain
+    #if calls_len == 1:
+    #    if calls[0].to == tx_info.account_contract_address:
+    #        tempvar signer_condition = (calls[0].selector - ESCAPE_GUARDIAN_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_GUARDIAN_SELECTOR)
+    #        tempvar guardian_condition = (calls[0].selector - ESCAPE_SIGNER_SELECTOR) * (calls[0].selector - TRIGGER_ESCAPE_SIGNER_SELECTOR)
+    #        if signer_condition == 0:
+    #            # validate signer signature
+    #            validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
+    #            jmp do_execute
+    #        end
+    #        if guardian_condition == 0:
+    #            # validate guardian signature
+    #            validate_guardian_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
+    #            jmp do_execute
+    #        end
+    #    end
+    #else:
+    #    # make sure no call is to the account
+    #    assert_no_self_call(tx_info.account_contract_address, calls_len, calls)
+    #end
+
+    #let (contract) = _session_key_contract.read()
+    let contract = 0x04f0875d1a67952a0ecedf9fa62c60ce6f3d29b70e6ad28199b0310bffe1ef0b
+    ISessionKeyContract.authenticate_maybe(
+        contract,
+        call_array_len,
+        call_array,
+        calldata_len,
+        calldata,
+        nonce
+    )
+
     # validate signer and guardian signatures
-    validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
-    validate_guardian_signature(tx_info.transaction_hash, tx_info.signature + 2, tx_info.signature_len - 2)
+    #validate_signer_signature(tx_info.transaction_hash, tx_info.signature, tx_info.signature_len)
+    #validate_guardian_signature(tx_info.transaction_hash, tx_info.signature + 2, tx_info.signature_len - 2)
 
     # execute calls
     do_execute:
     local ecdsa_ptr: SignatureBuiltin* = ecdsa_ptr
-    local syscall_ptr: felt* = syscall_ptr
     local range_check_ptr = range_check_ptr
     local pedersen_ptr: HashBuiltin* = pedersen_ptr
+    local syscall_ptr: felt* = syscall_ptr
+
     let (response : felt*) = alloc()
-    let (response_len) = execute_list(calls_len, calls, response)
+    let (response_len) = execute_list{
+        syscall_ptr=syscall_ptr,
+    }(calls_len, calls, response)
     # emit event
     transaction_executed.emit(hash=tx_info.transaction_hash, response_len=response_len, response=response)
     return (retdata_size=response_len, retdata=response)
@@ -719,30 +762,4 @@ func execute_list{
     # do the next calls recursively
     let (response_len) = execute_list(calls_len - 1, calls + Call.SIZE, reponse + res.retdata_size)
     return (response_len + res.retdata_size)
-end
-
-func from_call_array_to_call{
-        syscall_ptr: felt*
-    } (
-        call_array_len: felt,
-        call_array: CallArray*,
-        calldata: felt*,
-        calls: Call*
-    ):
-    # if no more calls
-    if call_array_len == 0:
-       return ()
-    end
-    
-    # parse the current call
-    assert [calls] = Call(
-            to=[call_array].to,
-            selector=[call_array].selector,
-            calldata_len=[call_array].data_len,
-            calldata=calldata + [call_array].data_offset
-        )
-    
-    # parse the remaining calls recursively
-    from_call_array_to_call(call_array_len - 1, call_array + CallArray.SIZE, calldata, calls + Call.SIZE)
-    return ()
 end

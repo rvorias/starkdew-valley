@@ -5,11 +5,13 @@ import HelloWorld from './components/HelloWorld.vue'
 import grunt from './components/grunt.vue'
 import flower from './components/flower.vue'
 
+import HelpAsync from './components/session_key/HelpAsync.vue';
 </script>
 
 <template>
   <div id="app" @click="handleClick">
-    <grunt></grunt>
+      <HelpAsync></HelpAsync>
+      <grunt></grunt>
       <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y"></flower>
   </div>
 </template>
