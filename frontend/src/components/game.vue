@@ -31,11 +31,14 @@ export default {
     }
   },
 
-  mounted () {
+  async mounted () {
     window.addEventListener('keydown', this.handleControlDown);
     window.addEventListener('keyup', this.handleControlUp);
     setInterval(this.moveGrunt, 1);
     setInterval(this.growWeed, 20);
+
+    let raw_coords = await starkvile.getAllFarms()
+    console.log(raw_coords)
   },
   methods: {
     distance(x1, y1, x2, y2) {
@@ -61,9 +64,12 @@ export default {
     async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
-        let build_farm = await starkvile.build_farm(gruntState.x,gruntState.y)
+        // let worker = await starkvile.claim_worker()
+        // console.log(worker)
+        let build_farm = await starkvile.build_farm(Math.round(gruntState.x), Math.round(gruntState.y))
 
         console.log(build_farm)
+        console.log(gruntState.x, gruntState.y)
         // Plant flowers
         // Use gruntState.x, gruntState.y
         this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0})
