@@ -18,8 +18,9 @@ import tilemap from "../assets/Atlas/tilemap.png"
       <ui></ui>
 
       <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
-        <div class="p-4 bg-white rounded-lg" style="z-index:10000;">
-          <h2 class="text-center my-4 font-bold text-xl">Regenerate your session key</h2>
+        <div class="p-4 bg-white rounded-lg relative" style="z-index:10000;">
+          <button class="absolute top-2 right-2 text-xs" @click="regenerateModalStep = 'nok'; setTimeout(() => regenerateModalStep = 'waiting', 60000)">Close</button>
+          <h2 class="text-center my-4 font-bold text-xl">Regenerate your ephemereal key</h2>
           <p class="text-sm text-center">Your temp key will soon expire</p>
           <p class="text-center">
             <button v-if="regenerateModalStep!=='ok'" class="bg-gradient-to-b from-yellow-100 via-yellow-200 to-yellow-600 my-4 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="regenerateModalStep !== 'waiting'"
@@ -137,30 +138,30 @@ export default {
       }
     },
     handleControlDown(event: KeyboardEvent) {
-      if (event.key === 'w') {
+      if (event.key === 'w' || event.key === 'z' || event.key === 'ArrowUp') {
         controller.up = true;
       }
-      if (event.key === 'a') {
+      if (event.key === 'a' || event.key === 'q' || event.key === 'ArrowLeft') {
         controller.left = true;
       }
-      if (event.key === 's') {
+      if (event.key === 's' || event.key === 'ArrowDown') {
         controller.down = true;
       }
-      if (event.key === 'd') {
+      if (event.key === 'd' || event.key === 'ArrowRight') {
         controller.right = true;
       }
     },
     handleControlUp(event: KeyboardEvent) {
-      if (event.key === 'w') {
+      if (event.key === 'w' || event.key === 'z' || event.key === 'ArrowUp') {
         controller.up = false;
       }
-      if (event.key === 'a') {
+      if (event.key === 'a' || event.key === 'q' || event.key === 'ArrowLeft') {
         controller.left = false;
       }
-      if (event.key === 's') {
+      if (event.key === 's' || event.key === 'ArrowDown') {
         controller.down = false;
       }
-      if (event.key === 'd') {
+      if (event.key === 'd' || event.key === 'ArrowRight') {
         controller.right = false;
       }
     },
