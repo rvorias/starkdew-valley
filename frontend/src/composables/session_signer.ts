@@ -6,7 +6,14 @@ export { ACCOUNT_CONTRACT, ACCOUNT_PRIVATE_KEY, SESSION_CONTRACT, SESSION_PRIVAT
 
 export const KEY_PAIR = getKeyPair(SESSION_PRIVATE_KEY);
 
+var slowMode = false;
+
+var sn: any;
+
 export function getSessionSigner() {
+    if (slowMode)
+        return sn.account;
+
     let prov = new Provider({
         baseUrl:"https://hackathon-3.starknet.io",
     });
@@ -20,6 +27,12 @@ export function getSessionSigner() {
     return signer;
 }
 
+export async function setSlowMode()
+{
+    sn = await getStarknet();
+    slowMode = true;
+}
+
 export async function setSessionKey() {
     let account = getSessionSigner();
     let nonce = parseInt((await account.callContract({
@@ -27,12 +40,11 @@ export async function setSessionKey() {
         entrypoint: "get_nonce",
         calldata: [],
     })).result[0], 16);
-    console.log(account);
     let tx = await account.invokeFunction(
         {
             contractAddress: ACCOUNT_CONTRACT,
             entrypoint: "set_session_key",
-            calldata: [await account.signer.getPubKey(), 90, GAME_CONTRACT, 0, nonce],
+            calldata: [await account.signer.getPubKey(), 900, GAME_CONTRACT, 0, nonce],
         }
     );
     console.log(tx);
