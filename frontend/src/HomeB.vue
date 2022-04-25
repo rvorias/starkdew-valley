@@ -8,14 +8,14 @@ import homeB from '@/assets/homeB.png?url';
             <h3 class="text-2xl font-bold">Use your regular wallet</h3>
             <p class="my-8">This gives you full control, but will lead to more annoyance.</p>
             <button @click="slowMode" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
-                Use your regular wallet
+                🐢 Use your regular wallet
             </button>
         </div>
         <div class="flex flex-col justify-center items-center text-center flex-1 p-4">
-            <h3 class="text-2xl font-bold">Use an ephemereal key</h3>
-            <p class="my-8">This will allow your browser to sign transactions automatically on your behalf</p>
+            <h3 class="text-2xl font-bold">Use session key</h3>
+            <p class="my-8">This will allow your browser to sign transactions automatically on your behalf.</p>
             <button @click="generateKeyAndGo" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
-                Create an ephemereal key
+                🚀 Create a session key
             </button>
         </div>
         <p class="absolute top-[70%]" v-if="status === 'generating'">...Loading...</p>
