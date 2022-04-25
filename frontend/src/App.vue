@@ -3,12 +3,16 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
 import grunt from './components/grunt.vue'
+import flower from './components/flower.vue'
 
 </script>
 
 <template>
   <div id="app">
     <grunt></grunt>
+    <li v-for="flower in flower_coords">
+      <flower :x_coord="flower.x" :y_coord="flower.y"></flower>
+    </li>
   </div>
 </template>
 
@@ -16,6 +20,14 @@ import grunt from './components/grunt.vue'
 import { gruntState, controller } from '@/datastore';
 
 export default {
+  data() {
+    return {
+      flower_coords: [{ x: 100, y: 100}, {x:500, y:500}]
+    }
+  },
+
+
+
   mounted () {
     window.addEventListener('keydown', this.handleControlDown);
     window.addEventListener('keyup', this.handleControlUp);

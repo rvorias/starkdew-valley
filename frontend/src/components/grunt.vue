@@ -38,7 +38,6 @@ export default {
 		}
 	},
 
-
 	methods: {
 		move (x, y) {
 			this.x = x;
@@ -55,7 +54,6 @@ export default {
 
 			this.animationName  = `walk-${direction}`;
 			this.transitionTime = Math.sqrt(xDist * xDist + yDist * yDist) / 75;
-
 		}
 	},
 }
