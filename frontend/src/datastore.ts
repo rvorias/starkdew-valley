@@ -13,10 +13,6 @@ export var controller = reactive({
     left: false,
 })
 
-export var plantState = reactive({
-    stage: 2,
-})
-
 export var weedStats = reactive({
     number_of_harvests: 0,
     total_yield: 0,
