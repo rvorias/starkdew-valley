@@ -12,3 +12,7 @@ export var controller = reactive({
     right: false,
     left: false,
 })
+
+export var plantState = reactive({
+    stage: 0,
+})
