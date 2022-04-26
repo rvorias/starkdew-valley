@@ -1,8 +1,11 @@
 <template>
     <div class="bg-white w-[1100px]">
         <h1>Async helper</h1>
-        <p><button @click.stop="setSessionKey" class="bg-gray-500">Create a temp key</button></p>
-        <p><button @click.stop="doSomething" class="bg-gray-500 my-1">Claim Worker</button></p>
+        <p>
+            <button @click.stop="setSessionKey" class="bg-gray-500 mx-1">Create a temp key</button>
+            <button @click.stop="doSomething" class="bg-gray-500 mx-1">Claim Worker</button>
+            <button @click.stop="resetState" class="bg-gray-500 mx-1">Reset State</button>
+        </p>
         <p><input type="text" size="70" v-model="session_contract"/><button class="bg-black text-white rounded-md" @click="setSessionContract">Set Contract</button><br/> Test - {{ getSessionKey() && false || '' }} {{ sessionKeyData }}</p>
     </div>
 </template>
@@ -17,6 +20,8 @@ import {
     SESSION_CONTRACT,
     SESSION_PRIVATE_KEY
 } from '@/composables/session_signer';
+
+import { GAME_CONTRACT } from '@/composables/contract_addresses';
 
 import { makeSigner } from './Help';
 import { Provider, Account, getStarknet, toBN } from '@/starknet_wrapper'
@@ -74,7 +79,7 @@ export default defineComponent({
                 entrypoint: "get_session_key",
                 calldata: [toBN(ACCOUNT_CONTRACT).toString()],
             })
-            this.sessionKeyData = key_data.result.join(' ');
+            this.sessionKeyData = key_data.result.join(' ') + ` Time left ${900 - Math.round(Date.now()/1000 - key_data.result[2].toString())}`;
         },
         async doSomething() {
             let account = getSessionSigner();
@@ -98,6 +103,27 @@ export default defineComponent({
             );*/
             console.log(await starkvile.claim_worker());
         },
+        async resetState() {
+            let account = getSessionSigner();
+            let nonce = parseInt((await account.callContract({
+                contractAddress: ACCOUNT_CONTRACT,
+                entrypoint: "get_nonce",
+                calldata: [],
+            })).result[0], 16);
+            let tx = await account.execute(
+                [{
+                    contractAddress: GAME_CONTRACT,
+                    entrypoint: "reset_state",
+                    calldata: [],
+                }],
+                undefined,
+                {
+                    nonce: nonce,
+                    maxFee: 0,
+                }
+            );
+            console.log(tx);
+        },
         async incrementNonce() {
             let account = getSessionSigner();
             let nonce = parseInt((await account.callContract({
@@ -117,6 +143,7 @@ export default defineComponent({
                     maxFee: 0,
                 }
             );
+            console.log(tx);
         }
     }
 })

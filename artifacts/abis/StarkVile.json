@@ -84,6 +84,12 @@
     },
     {
         "inputs": [],
+        "name": "reset_state",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "claim_worker",
         "outputs": [
             {

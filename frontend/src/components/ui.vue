@@ -5,16 +5,17 @@
 
 <template>
     <div class="ui-frame">
-        <p>Nº Harvests: {{ weedStats.number_of_harvests }}</p>
         <p>Total Yield: {{ weedStats.total_yield }}</p>
-        <p>Nº Transactions: </p>
+        <p>Harvests: {{ weedStats.number_of_harvests }}</p>
+        <p>Nº Transactions: {{ tx_store.nb_tx }}</p>
+        <p>Last Tx Status: {{ lastStatus }}</p>
     </div>
 </template>
 
 <style>
 .ui-frame {
     float: right;
-    width: 200px;
+    width: 230px;
     height: auto;
     background: rgb(133,244,246);
     background: linear-gradient(180deg, rgba(133,244,246,1) 0%, rgba(91,169,249,1) 37%, rgba(45,88,253,1) 100%);
@@ -33,10 +34,31 @@ p {
 
 
 <script lang="ts">
+import { getSessionSigner, tx_store } from '@/composables/session_signer';
 
 export default {
   data() {
-    return {}
+    return {
+      lastStatus: "",
+    }
+  },
+  mounted() {
+    setInterval(this.updateLastTx, 4000);
+  },
+  methods: {
+    async updateLastTx() {
+      if (!tx_store.last_tx_hash)
+      {
+        this.lastStatus = "";
+        return;
+      }
+      this.lastStatus = (await getSessionSigner().getTransactionStatus(tx_store.last_tx_hash)).tx_status;
+    }
+  },
+  computed: {
+    tx_store() {
+      return tx_store;
+    }
   }
 }
 </script>

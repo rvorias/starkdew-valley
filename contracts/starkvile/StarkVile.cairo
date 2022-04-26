@@ -31,7 +31,7 @@ end
 # EXTERNAL #
 ############
 
-const CLAIM_TIME = 30
+const CLAIM_TIME = 15
 const CLAIM_AMOUNT = 10
 
 struct Farm:
@@ -69,7 +69,7 @@ end
 @view
 func get_wheat{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(address: felt) -> (wheat : felt):
     alloc_locals
-    let (wheat) = players_wheat.read(address)
+    let (wheat) = players_wheat.read(246)
     return (wheat=wheat)
 end
 
@@ -106,6 +106,18 @@ func getAllFarms{
     return ((all_farms - farms) / Farm.SIZE, farms)
 end 
 
+@external
+func reset_state{
+    syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
+}() -> ():
+    
+    # Reset that shit.
+    players_wheat.write(246, 0)
+    farm_counter.write(0)
+    return ()
+end
+
+
 # CLAIMS WORKER
 @external
 func claim_worker{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (success : felt):
@@ -114,14 +126,14 @@ func claim_worker{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # TODO: Based off address, need better perm 
     let (caller) = get_caller_address()
 
-    let (workers) = players_workers.read(caller)
+    let (workers) = players_workers.read(246)
 
     with_attr error_message("You have already claimed"):
         assert_not_equal(workers, 1)
     end
 
     # add worker
-    players_workers.write(caller, 1)
+    players_workers.write(246, 1)
 
     #TOOD: Emit 
 
@@ -137,7 +149,7 @@ func build_farm{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 
     let (planting_time) = get_block_timestamp()
 
-    let (workers) = players_workers.read(caller)
+    let (workers) = players_workers.read(246)
 
     # with_attr error_message("Ser, claim a peasant first"):
     #     assert_not_zero(workers)
@@ -165,7 +177,7 @@ farm_id: felt, x_coord: felt, y_coord: felt) -> (success : felt):
 
     # check owner
     with_attr error_message("Ser, you do not own this farm"):
-        #assert farm.owner = 2
+        #assert farm.owner = 246
         assert farm.x_coord = x_coord
         assert farm.y_coord = y_coord
     end
@@ -177,16 +189,16 @@ farm_id: felt, x_coord: felt, y_coord: felt) -> (success : felt):
     let (less_than) = is_le(available, 5)
 
     if less_than == 1:
-        let (current_balance) = players_wheat.read(caller)
+        let (current_balance) = players_wheat.read(246)
 
         # return remainder
-        farms.write(farm_id, Farm(block_timestamp - remainder, caller, x_coord, y_coord))
+        farms.write(farm_id, Farm(block_timestamp - remainder, 246, x_coord, y_coord))
 
-        players_wheat.write(caller, current_balance + claimable)
+        players_wheat.write(246, current_balance + claimable)
         return (1)
     end
     
-    farms.write(farm_id, Farm(block_timestamp - remainder, caller, x_coord, y_coord))
+    farms.write(farm_id, Farm(block_timestamp - remainder, 246, x_coord, y_coord))
 
     return (1)
 end

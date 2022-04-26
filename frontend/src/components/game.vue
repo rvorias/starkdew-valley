@@ -10,15 +10,15 @@ import tilemap from "../assets/Atlas/tilemap.png"
 </script>
 
 <template>
-  <div id="game" @click="handleClick" class="relative" :style="{ background: `url(${tilemap})` }">
+  <div id="game" @dblclick="handleClick" class="relative" :style="{ background: `url(${tilemap})` }">
       <scene></scene>
       <!-- <farm></farm> -->
       <grunt></grunt>
-      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="Math.floor(flower.stage / 1000 / 60)"></flower>
+      <flower  v-for="flower in flower_coords" :x_coord="flower.x" :y_coord="flower.y" :stage="Math.floor(flower.stage / 1000 / 15)"></flower>
       <ui></ui>
 
       <div class="absolute bottom-0">
-        <p v-for="mess of messages.mess"> {{ mess }}</p>
+        <p v-for="mess of messages.mess.slice(-3)"> {{ mess }}</p>
       </div>
 
       <div  v-if="regenerateModalStep !== 'nok'"  class="w-full h-full flex justify-center items-center">
@@ -45,7 +45,7 @@ import tilemap from "../assets/Atlas/tilemap.png"
 <script lang="ts">
 import { starkvile } from '@/composables/contract'
 import { getStarknet } from 'get-starknet';
-import { setSessionKey } from '@/composables/session_signer';
+import { setSessionKey, tx_store } from '@/composables/session_signer';
 import { gruntState, controller, weedStats, messages } from '@/datastore';
 
 export default {
@@ -63,17 +63,19 @@ export default {
     setInterval(this.moveGrunt, 1);
     setInterval(this.growWeed, 20);
 
+    let weedSt = starkvile.get_wheat(0xcafe);
     let raw_coords = await starkvile.getAllFarms()
     raw_coords.farms.map((a, index) => {
       const age = Math.round(Date.now() / 1000 -  a.plant_time.toString());
       this.flower_coords.push({ x: parseInt(a.x_coord.toString()), y:  parseInt(a.y_coord.toString()), stage: age * 1000, idx: raw_coords[0].length - index - 1 })
     })
+    weedStats.total_yield = +(await weedSt).wheat.toString();
 
     console.log(this.flower_coords);
 
     this.flower_idx = raw_coords[0].length
 
-    setTimeout(() => this.regenerateModalStep = 'waiting', 45 * 1000)
+    setTimeout(() => this.regenerateModalStep = 'waiting', 60 * 1000)
   },
   methods: {
     async regenerateKeyPrompt() {
@@ -120,12 +122,10 @@ export default {
     async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
-        // let worker = await starkvile.claim_worker()
-        // console.log(worker)
-        let build_farm = await starkvile.build_farm(Math.round(gruntState.x), Math.round(gruntState.y))
+        let build_farm = await starkvile.build_farm(Math.round(gruntState.x), Math.round(gruntState.y));
+        tx_store.last_tx_hash = build_farm.transaction_hash;
+        tx_store.nb_tx += 1;
 
-        console.log(build_farm)
-        console.log(gruntState.x, gruntState.y)
         // Plant flowers
         // Use gruntState.x, gruntState.y
         this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0, index: this.flower_idx})
@@ -142,15 +142,16 @@ export default {
               if (index !== -1) {
                 weedStats.number_of_harvests += 1;
                 let build_farm = await starkvile.claim_resources(flower.idx, Math.round(flower.x), Math.round(flower.y))
+                tx_store.last_tx_hash = build_farm.transaction_hash;
+                tx_store.nb_tx += 1;
 
-                console.log(build_farm)
-
-                let stage = parseInt(flower.stage/1000/60);
+                let stage = parseInt(flower.stage / 1000 / 15);
                 if (stage > 4) {
                   stage = 0;
                 }
                 weedStats.total_yield += Math.pow(2, stage)-1;
-                this.flower_coords.splice(index, 1);
+                //this.flower_coords.splice(index, 1);
+                this.flower_coords[index].stage = 0;
                 messages.mess.push("Flower harvested");
             }
           }

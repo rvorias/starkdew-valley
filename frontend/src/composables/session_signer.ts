@@ -33,6 +33,12 @@ export async function setSlowMode()
     slowMode = true;
 }
 
+import { reactive } from 'vue';
+export var tx_store = reactive({
+    last_tx_hash: undefined,
+    nb_tx: 0,
+});
+
 export async function setSessionKey() {
     let account = getSessionSigner();
     let nonce = parseInt((await account.callContract({
@@ -47,5 +53,5 @@ export async function setSessionKey() {
             calldata: [await account.signer.getPubKey(), 900, GAME_CONTRACT, 0, nonce],
         }
     );
-    console.log(tx);
+    tx_store.last_tx_hash = tx.transaction_hash;
 };
