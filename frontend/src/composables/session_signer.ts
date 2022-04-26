@@ -35,6 +35,11 @@ export async function setSlowMode()
     slowMode = true;
 }
 
+export async function getSlowMode()
+{
+    return slowMode;
+}
+
 import { reactive } from 'vue';
 export var tx_store = reactive({
     last_tx_hash: undefined,

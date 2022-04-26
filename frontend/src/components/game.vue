@@ -48,7 +48,7 @@ import tilemap from "../assets/Atlas/tilemap.png"
 <script lang="ts">
 import { starkvile } from '@/composables/contract'
 import { getStarknet } from 'get-starknet';
-import { setSessionKey, tx_store } from '@/composables/session_signer';
+import { setSessionKey, tx_store, getSlowMode } from '@/composables/session_signer';
 import { gruntState, controller, weedStats, messages } from '@/datastore';
 
 export default {
@@ -99,7 +99,8 @@ export default {
       await new Promise((resolve) => setTimeout(() => resolve(), 2500));
       await settingKey;
       this.regenerateModalStep = 'ok';
-      setTimeout(() => this.regenerateModalStep = 'nok', 3000)
+      if (!getSlowMode())
+        setTimeout(() => this.regenerateModalStep = 'nok', 3000)
     },
     async pushBackModal() {
       this.regenerateModalStep = 'nok';
@@ -128,6 +129,7 @@ export default {
     async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
+        messages.mess.push("Planting flower");
         let x = gruntState.x;
         let y = gruntState.y;
 
@@ -151,6 +153,7 @@ export default {
               if (index !== -1) {
                 weedStats.number_of_harvests += 1;
                 console.log("CLAIM RES", flower);
+                messages.mess.push("Harvesting flower");
                 let build_farm = await starkvile.claim_resources(flower.idx, Math.round(flower.x), Math.round(flower.y))
                 tx_store.last_tx_hash = build_farm.transaction_hash;
                 tx_store.nb_tx += 1;
