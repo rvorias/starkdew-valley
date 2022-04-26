@@ -10,12 +10,14 @@ var slowMode = false;
 
 var sn: any;
 
+export const gatewayUrl = "http://localhost:5000" // "https://hackathon-3.starknet.io";
+
 export function getSessionSigner() {
     if (slowMode)
         return sn.account;
 
     let prov = new Provider({
-        baseUrl: "https://hackathon-3.starknet.io",
+        baseUrl: gatewayUrl,
     });
     let signer = new Account(prov, ACCOUNT_CONTRACT, KEY_PAIR);
     signer.estimateFee = async () => {

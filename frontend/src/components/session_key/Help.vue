@@ -18,7 +18,8 @@ import {
     ACCOUNT_CONTRACT,
     ACCOUNT_PRIVATE_KEY,
     SESSION_CONTRACT,
-    SESSION_PRIVATE_KEY
+    SESSION_PRIVATE_KEY,
+    gatewayUrl
 } from '@/composables/session_signer';
 
 import { GAME_CONTRACT } from '@/composables/contract_addresses';
@@ -42,7 +43,7 @@ export default defineComponent({
     methods: {
         getSigner() {
             let prov = new Provider({
-                baseUrl:"https://hackathon-3.starknet.io",
+                baseUrl: gatewayUrl,
             });
             let signer = new Account(prov, ACCOUNT_CONTRACT, getKeyPair(ACCOUNT_PRIVATE_KEY));
             return signer;

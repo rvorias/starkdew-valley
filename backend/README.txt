@@ -1,19 +1,19 @@
-export STARKNET_GATEWAY_URL=https://hackathon-3.starknet.io/
-export STARKNET_FEEDER_GATEWAY_URL=https://hackathon-3.starknet.io/
+export STARKNET_GATEWAY_URL=http://localhost:5000/
+export STARKNET_FEEDER_GATEWAY_URL=http://localhost:5000/
 export STARKNET_CHAIN_ID=SN_GOERLI
-export STARKNET_NETWORK_ID=hackathon-3
+export STARKNET_NETWORK_ID=localhost
 
 cd argent
 nile compile contracts/SessionKey.cairo   
 starknet deploy --contract artifacts/SessionKey.json 
 
-# Contract address: 0x05445b794087a540c714788b29ce76b5ff9056a7cdb635effe4a6f5017492d30
+# Contract address: 0x0067d37cbfbe55601dd24901427009d5495fec3e6120d43e99ac31c7125f062d
 # Here update argent default address
 
 nile compile contracts/ArgentAccount.cairo --account_contract
 starknet deploy --contract artifacts/ArgentAccount.json
 
-# Address 0x0347ad5f0c88431ae90c66b064cce247a9bec8f13101c6a9e9c831db636f9e28
+# Address 0x061d93e666009effec049a0ac5f79325d425251a7dfce9baf3f9db48dd1d3674
 
 cd ../starkdew
 nile compile

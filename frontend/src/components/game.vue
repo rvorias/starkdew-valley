@@ -39,6 +39,9 @@ import tilemap from "../assets/Atlas/tilemap.png"
           <p class="text-center" v-if="regenerateModalStep==='ok'">All Good!</p>
         </div>
       </div>
+      <div v-if="!initialLoad" class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+        <h1 class="text-center text-white text-4xl">... Loading ...</h1>
+      </div>
   </div>
 </template>
 
@@ -54,6 +57,7 @@ export default {
       flower_coords: [],
       flower_idx: 0,
       regenerateModalStep: "nok" as "nok" | "waiting" | "regenerating" | "ok",
+      initialLoad: false,
     }
   },
 
@@ -74,6 +78,8 @@ export default {
     console.log(this.flower_coords);
 
     this.flower_idx = raw_coords[0].length
+
+    this.initialLoad = true;
 
     setTimeout(() => this.regenerateModalStep = 'waiting', 60 * 1000)
   },
@@ -122,13 +128,16 @@ export default {
     async handleClick(event: MouseEvent) {
       var harvestable = this.getHarvestable()
       if (harvestable == null) {
+        let x = gruntState.x;
+        let y = gruntState.y;
+
         let build_farm = await starkvile.build_farm(Math.round(gruntState.x), Math.round(gruntState.y));
         tx_store.last_tx_hash = build_farm.transaction_hash;
         tx_store.nb_tx += 1;
 
         // Plant flowers
         // Use gruntState.x, gruntState.y
-        this.flower_coords.push({x: gruntState.x, y: gruntState.y, stage: 0, index: this.flower_idx})
+        this.flower_coords.push({x, y, stage: 0, idx: this.flower_idx})
 
         this.flower_idx++;
         messages.mess.push("Flower planted");
@@ -141,6 +150,7 @@ export default {
             var index = this.flower_coords.indexOf(flower);
               if (index !== -1) {
                 weedStats.number_of_harvests += 1;
+                console.log("CLAIM RES", flower);
                 let build_farm = await starkvile.claim_resources(flower.idx, Math.round(flower.x), Math.round(flower.y))
                 tx_store.last_tx_hash = build_farm.transaction_hash;
                 tx_store.nb_tx += 1;
