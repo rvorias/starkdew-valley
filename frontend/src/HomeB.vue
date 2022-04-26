@@ -7,14 +7,14 @@ import homeB from '@/assets/homeB.png?url';
         <div class="flex flex-col justify-center items-center text-center flex-1 p-20">
             <h3 class="text-2xl font-bold">Use your regular wallet</h3>
             <p class="my-8">This gives you full control, but will lead to more annoyance.</p><br>
-            <button @click="slowMode" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
+            <button @click="slowMode" class="bg-gradient-to-b from-gray-100 via-yellow-200 to-orange-400 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
                 🐢 Use your regular wallet
             </button>
         </div>
         <div class="flex flex-col justify-center items-center text-center flex-1 p-20">
             <h3 class="text-2xl font-bold">Use session key</h3>
             <p class="my-8">This will allow your browser to sign transactions automatically on your behalf.</p>
-            <button @click="generateKeyAndGo" class="bg-yellow-500 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
+            <button @click="generateKeyAndGo" class="bg-gradient-to-b from-gray-100 via-yellow-200 to-orange-400 px-2 py-1 rounded-lg disabled:bg-gray-300 disabled:text-gray-500" :disabled="status !== 'noclick'">
                 🚀 Create a session key
             </button>
         </div>
