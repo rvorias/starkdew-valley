@@ -6,7 +6,7 @@ import Help from './components/session_key/Help.vue';
 <template>
     <div id="app">
         <game></game>
-        <Help></Help>
+        <!--<Help></Help>-->
     </div>
 </template>
 
