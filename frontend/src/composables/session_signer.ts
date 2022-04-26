@@ -15,7 +15,7 @@ export function getSessionSigner() {
         return sn.account;
 
     let prov = new Provider({
-        baseUrl:"https://hackathon-3.starknet.io",
+        baseUrl: "https://hackathon-3.starknet.io",
     });
     let signer = new Account(prov, ACCOUNT_CONTRACT, KEY_PAIR);
     signer.estimateFee = async () => {

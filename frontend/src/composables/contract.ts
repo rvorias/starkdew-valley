@@ -1,5 +1,5 @@
 import { Contract } from 'starknet'
-import abi from '../../../artifacts/abis/StarkVile.json'
+import abi from '../../../backend/starkdew/artifacts/abis/StarkVile.json'
 import { getSessionSigner } from './session_signer'
 
 import { GAME_CONTRACT } from './contract_addresses';
