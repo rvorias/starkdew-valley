@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted() {
-    setInterval(this.updateLastTx, 4000);
+    setInterval(this.updateLastTx, 10000);
   },
   methods: {
     async updateLastTx() {

@@ -77,7 +77,7 @@ export default {
 
     console.log(this.flower_coords);
 
-    this.flower_idx = raw_coords[0].length
+    this.flower_idx = raw_coords[0].length || 0;
 
     this.initialLoad = true;
 
@@ -139,7 +139,7 @@ export default {
 
         // Plant flowers
         // Use gruntState.x, gruntState.y
-        this.flower_coords.push({x, y, stage: 0, idx: this.flower_idx})
+        this.flower_coords.push({x, y, stage: 0, idx: this.flower_idx || 0})
 
         this.flower_idx++;
         messages.mess.push("Flower planted");

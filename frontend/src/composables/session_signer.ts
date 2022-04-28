@@ -57,7 +57,7 @@ export async function setSessionKey() {
         {
             contractAddress: ACCOUNT_CONTRACT,
             entrypoint: "set_session_key",
-            calldata: [await account.signer.getPubKey(), 900, GAME_CONTRACT, 0, nonce],
+            calldata: [await account.signer.getPubKey(), 9000, GAME_CONTRACT, 0, nonce],
         }
     );
     tx_store.last_tx_hash = tx.transaction_hash;
